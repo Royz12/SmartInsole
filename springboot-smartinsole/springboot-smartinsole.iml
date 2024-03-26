@@ -16,7 +16,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="entityManagerFactory" />
-          <factory-entry name="springboot-smartinsole" />
+          <factory-entry name="springboot-smartinsole" value="2ed9ca8b-9642-44e5-a3e0-bc5e0dab5d5e" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

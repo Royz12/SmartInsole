@@ -7,4 +7,5 @@
         values (#{user_name},#{password},#{phonenumber},#{role_type},#{profile_picture})
     </insert>
 
+
 </mapper>
