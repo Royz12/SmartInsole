@@ -33,7 +33,7 @@ public class UserController {
 
     @PostMapping("/login")
     public Result login(@RequestBody User user){
-        userService.login(user);
-        return Result.success();
+        User userinfo= userService.login(user);
+        return Result.success(userinfo);
     }
 }

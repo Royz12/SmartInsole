@@ -14,7 +14,8 @@ public class UserService {
         userMapper.insert(user);
     }
 
-    public void login(User user) {
-        userMapper.login(user);
+    public User login(User user) {
+        User userinfo=userMapper.login(user);
+        return  userinfo;
     }
 }
