@@ -17,8 +17,14 @@ public class UserController {
 
     @PostMapping("/add")
     public Result add( @RequestBody User user){
+        System.out.println(user);
         userService.insertUser(user);
         return Result.success();
     }
 
+    @PostMapping("/login")
+    public Result login(@RequestBody User user){
+        userService.login(user);
+        return Result.success();
+    }
 }
