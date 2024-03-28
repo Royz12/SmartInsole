@@ -6,6 +6,8 @@ import com.graduationdesign.springbootsmartinsole.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.DuplicateFormatFlagsException;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -17,8 +19,15 @@ public class UserController {
 
     @PostMapping("/add")
     public Result add( @RequestBody User user){
-        System.out.println(user);
-        userService.insertUser(user);
+        try{
+            userService.insertUser(user);
+        }catch (Exception e){
+            if(e instanceof DuplicateFormatFlagsException){
+                return Result.error("插入数据库错误");
+            }else{
+                return Result.error("系统错误");
+            }
+        }
         return Result.success();
     }
 

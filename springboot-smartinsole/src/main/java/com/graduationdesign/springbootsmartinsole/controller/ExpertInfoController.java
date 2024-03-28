@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.DuplicateFormatFlagsException;
+
 @RestController
 @RequestMapping("/expertinfo")
 public class ExpertInfoController {
@@ -21,7 +23,15 @@ public class ExpertInfoController {
 
     @PostMapping("/add")
     public Result add(@RequestBody ExpertInfo expertInfo){
-        expertInfoService.insertExpert(expertInfo);
+        try{
+            expertInfoService.insertExpert(expertInfo);
+        }catch (Exception e){
+            if(e instanceof DuplicateFormatFlagsException){
+                return Result.error("插入数据库错误");
+            }else{
+                return Result.error("系统错误");
+            }
+        }
         return Result.success();
     }
 }

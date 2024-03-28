@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/insole.iml" filepath="$PROJECT_DIR$/.idea/insole.iml" />
-      <module fileurl="file://$PROJECT_DIR$/springboot-smartinsole/springboot-smartinsole.iml" filepath="$PROJECT_DIR$/springboot-smartinsole/springboot-smartinsole.iml" />
     </modules>
   </component>
 </project>
