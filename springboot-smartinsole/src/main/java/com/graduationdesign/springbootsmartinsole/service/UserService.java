@@ -13,4 +13,8 @@ public class UserService {
     public void insertUser (User user){
         userMapper.insert(user);
     }
+
+    public void login(User user) {
+        userMapper.login(user);
+    }
 }

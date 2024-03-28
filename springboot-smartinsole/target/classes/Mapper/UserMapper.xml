@@ -7,5 +7,9 @@
         values (#{user_name},#{password},#{phonenumber},#{role_type},#{profile_picture})
     </insert>
 
+    <select id="login">
+        select * from user
+        where user_name = #{user_name} and password = #{user_password} and phonenumber=#{phonenumber}
+    </select>
 
 </mapper>
