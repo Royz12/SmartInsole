@@ -32,8 +32,17 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Result login(@RequestBody User user){
-        User userinfo= userService.login(user);
+    public Result login(@RequestBody User user) {
+        User userinfo;
+        try {
+            userinfo = userService.login(user);
+        } catch (Exception e) {
+            if (e instanceof DuplicateFormatFlagsException) {
+                return Result.error("插入数据库错误");
+            } else {
+                return Result.error("系统错误");
+            }
+        }
         return Result.success(userinfo);
     }
 }
