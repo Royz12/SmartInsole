@@ -6,6 +6,7 @@ import com.graduationdesign.springbootsmartinsole.entity.ExpertInfo;
 import com.graduationdesign.springbootsmartinsole.service.ExpertInfoService;
 import com.graduationdesign.springbootsmartinsole.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,8 +42,12 @@ public class ExpertInfoController {
      */
     @PostMapping("/login")
     public Result login(@RequestBody ExpertInfoDto expertInfoDto){
-        String phonenumber=expertInfoDto.getPhonenumber();
-        String password=expertInfoDto.getPassword();
-        return expertInfoService.login(expertInfoDto);
+        String PhoneNumber=expertInfoDto.getPhonenumber();
+        String Password=expertInfoDto.getPassword();
+        if( StringUtils.isEmpty(PhoneNumber) || StringUtils.isEmpty(Password)){
+            return Result.error("请输入手机号或密码");
+        }else{
+            return expertInfoService.login(expertInfoDto);
+        }
     }
 }

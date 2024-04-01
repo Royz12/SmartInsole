@@ -8,4 +8,10 @@
         insert into sportmaninfo (sportman_id,password,sportman_name,phonenumber,height,weight,selfintro,profile_picture)
         values (#{sportman_id},#{password},#{sportman_name},#{phonenumber},#{height},#{weight},#{selfintro},#{profile_picture})
     </insert>
+
+    <select id="login" resultType="com.graduationdesign.springbootsmartinsole.entity.SportmanInfo">
+        select * from sportmaninfo
+        where phonenumber = #{phonenumber} and password = #{password}
+    </select>
+
 </mapper>
