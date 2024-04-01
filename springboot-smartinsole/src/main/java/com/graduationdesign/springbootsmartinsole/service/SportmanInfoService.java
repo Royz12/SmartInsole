@@ -12,4 +12,9 @@ public class SportmanInfoService {
     public void insert(SportmanInfo sportmanInfo) {
         sportmanInfoMapper.insert(sportmanInfo);
     }
+
+    public SportmanInfo login(SportmanInfo sportman) {
+        SportmanInfo sportmaninfo=sportmanInfoMapper.login(sportman);
+        return  sportmaninfo;
+    }
 }
