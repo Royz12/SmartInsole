@@ -9,7 +9,7 @@ public class SportmanInfo {
     private int sportman_id;
     private String password;
     private String sportman_name;
-    private int phonenumber;
+    private String phonenumber;
     private double height;
     private double weight;
     private String selfintro;
@@ -42,11 +42,11 @@ public class SportmanInfo {
         this.sportman_name = sportman_name;
     }
 
-    public int getPhonenumber() {
+    public String getPhonenumber() {
         return phonenumber;
     }
 
-    public void setPhonenumber(int phonenumber) {
+    public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
 

@@ -4,4 +4,8 @@
 <mapper namespace="com.graduationdesign.springbootsmartinsole.mapper.SportmanInfoMapper">
 
 
+    <insert id="insert">
+        insert into sportmaninfo (sportman_id,password,sportman_name,phonenumber,height,weight,selfintro,profile_picture)
+        values (#{sportman_id},#{password},#{sportman_name},#{phonenumber},#{height},#{weight},#{selfintro},#{profile_picture})
+    </insert>
 </mapper>

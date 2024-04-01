@@ -6,5 +6,8 @@
         insert into expertinfo(expert_id,password,expert_name,phonenumber,height,weight,worktime,selfintro,profile_picture)
         values(#{expert_id},#{password},#{expert_name},#{phonenumber},#{height},#{weight},#{worktime},#{selfintro},#{profile_picture})
     </insert>
+    <select id="FindByPass" resultType="java.lang.String">
+        select password from expertinfo where phonenumber=#{phonenumber}
+    </select>
 
 </mapper>

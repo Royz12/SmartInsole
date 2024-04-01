@@ -23,4 +23,5 @@ public class NewsController {
         newsService.insertNews(news);
         return Result.success();
     }
+
 }

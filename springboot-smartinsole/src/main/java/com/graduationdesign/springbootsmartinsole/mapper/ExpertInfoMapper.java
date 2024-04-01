@@ -6,4 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ExpertInfoMapper {
     void insert(ExpertInfo expertInfo);
+
+    String FindByPass(String phonenumber);
 }

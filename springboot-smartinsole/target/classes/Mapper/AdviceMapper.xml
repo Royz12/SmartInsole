@@ -4,4 +4,8 @@
 <mapper namespace="com.graduationdesign.springbootsmartinsole.mapper.AdviceMapper">
 
 
+    <insert id="insert">
+        insert into advice(sportman_id,sportman_name,expert_id,expert_name,advice)
+        values (#{sportman_id},#{sportman_name},#{expert_id},#{expert_name},#{advice})
+    </insert>
 </mapper>

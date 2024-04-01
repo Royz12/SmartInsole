@@ -1,6 +1,7 @@
 package com.graduationdesign.springbootsmartinsole.controller;
 
 import com.graduationdesign.springbootsmartinsole.common.Result;
+import com.graduationdesign.springbootsmartinsole.controller.dto.ExpertInfoDto;
 import com.graduationdesign.springbootsmartinsole.entity.ExpertInfo;
 import com.graduationdesign.springbootsmartinsole.service.ExpertInfoService;
 import com.graduationdesign.springbootsmartinsole.service.NewsService;
@@ -33,5 +34,15 @@ public class ExpertInfoController {
             }
         }
         return Result.success();
+    }
+    /**
+     * 专家登录
+     * @param expertInfoDto
+     */
+    @PostMapping("/login")
+    public Result login(@RequestBody ExpertInfoDto expertInfoDto){
+        String phonenumber=expertInfoDto.getPhonenumber();
+        String password=expertInfoDto.getPassword();
+        return expertInfoService.login(expertInfoDto);
     }
 }

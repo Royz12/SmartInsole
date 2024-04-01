@@ -3,8 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.graduationdesign.springbootsmartinsole.mapper.ExpertInfoMapper">
     <insert id="insert">
-        insert into expertinfo(expert_id,password,expertname,phonenumber,height,weight,worktime,selfintro,profile_picture)
-        values(#{expert_id},#{password},#{expertname},#{phonenumber},#{height},#{weight},#{worktime},#{selfintro},#{profile_picture})
+        insert into expertinfo(expert_id,password,expert_name,phonenumber,height,weight,worktime,selfintro,profile_picture)
+        values(#{expert_id},#{password},#{expert_name},#{phonenumber},#{height},#{weight},#{worktime},#{selfintro},#{profile_picture})
     </insert>
+    <select id="FindByPass" resultType="java.lang.String">
+        select password from expertinfo where phonenumber=#{phonenumber}
+    </select>
 
 </mapper>
