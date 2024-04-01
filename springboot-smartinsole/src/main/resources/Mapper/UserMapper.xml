@@ -7,9 +7,9 @@
         values (#{user_name},#{password},#{phonenumber},#{role_type},#{profile_picture})
     </insert>
 
-    <select id="login">
-        select *
-        where (user_name=#{user_name} or phonenumber=#{phonenumber}) and password=#{password}
+    <select id="login" resultType="com.graduationdesign.springbootsmartinsole.entity.User">
+        select * from user
+        where user_name= #{user_name} and phonenumber= #{phonenumber} and password= #{password}
     </select>
 
 </mapper>

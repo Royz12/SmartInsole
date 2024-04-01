@@ -2,6 +2,7 @@ package com.graduationdesign.springbootsmartinsole.controller;
 
 import com.graduationdesign.springbootsmartinsole.common.Result;
 import com.graduationdesign.springbootsmartinsole.entity.SportmanInfo;
+import com.graduationdesign.springbootsmartinsole.entity.User;
 import com.graduationdesign.springbootsmartinsole.service.SportmanInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,5 +35,18 @@ public class SportmanInfoController {
         return Result.success();
     }
 
-
+    @PostMapping("/login")
+    public Result login(@RequestBody SportmanInfo sportman) {
+        SportmanInfo sportmaninfo;
+        try {
+            sportmaninfo = sportmanInfoService.login(sportman);
+        } catch (Exception e) {
+            if (e instanceof DuplicateFormatFlagsException) {
+                return Result.error("插入数据库错误");
+            } else {
+                return Result.error("系统错误");
+            }
+        }
+        return Result.success(sportmaninfo);
+    }
 }

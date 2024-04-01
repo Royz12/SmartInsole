@@ -8,8 +8,8 @@
     </insert>
 
     <select id="login">
-        select * from user
-        where user_name = #{user_name} and password = #{user_password} and phonenumber=#{phonenumber}
+        select *
+        where (user_name=#{user_name} or phonenumber=#{phonenumber}) and password=#{password}
     </select>
 
 </mapper>

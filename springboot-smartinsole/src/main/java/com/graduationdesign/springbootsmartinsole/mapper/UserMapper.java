@@ -10,5 +10,5 @@ public interface UserMapper {
 //            "(#{user_name},#{password},#{phonenumber},#{role_type},#{profile_picture})")
     void insert(User user);
 
-    void login(User user);
+    User login(User user);
 }
