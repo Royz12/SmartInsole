@@ -28,5 +28,8 @@
     <select id="FindByPass" resultType="java.lang.String">
         select password from expertinfo where phonenumber=#{phonenumber}
     </select>
+    <select id="selectAll" resultType="com.graduationdesign.springbootsmartinsole.entity.ExpertInfo">
+        select * from expertinfo
+    </select>
 
 </mapper>

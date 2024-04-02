@@ -3,6 +3,8 @@ package com.graduationdesign.springbootsmartinsole.mapper;
 import com.graduationdesign.springbootsmartinsole.entity.ExpertInfo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ExpertInfoMapper {
     void insert(ExpertInfo expertInfo);
@@ -12,4 +14,6 @@ public interface ExpertInfoMapper {
     void update(ExpertInfo expertInfo);
 
     void modifyPass(ExpertInfo expertInfo);
+
+    List<ExpertInfo> selectAll();
 }

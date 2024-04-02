@@ -7,6 +7,8 @@ import com.graduationdesign.springbootsmartinsole.mapper.ExpertInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ExpertInfoService {
     @Autowired
@@ -30,5 +32,9 @@ public class ExpertInfoService {
 
     public void modifyPass(ExpertInfo expertInfo) {
         expertInfoMapper.modifyPass(expertInfo);
+    }
+
+    public List<ExpertInfo> selectAll() {
+        return expertInfoMapper.selectAll();
     }
 }

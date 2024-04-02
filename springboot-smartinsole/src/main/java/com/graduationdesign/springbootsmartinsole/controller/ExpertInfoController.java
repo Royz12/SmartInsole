@@ -4,15 +4,12 @@ import com.graduationdesign.springbootsmartinsole.common.Result;
 import com.graduationdesign.springbootsmartinsole.controller.dto.ExpertInfoDto;
 import com.graduationdesign.springbootsmartinsole.entity.ExpertInfo;
 import com.graduationdesign.springbootsmartinsole.service.ExpertInfoService;
-import com.graduationdesign.springbootsmartinsole.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.DuplicateFormatFlagsException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/expertinfo")
@@ -83,5 +80,14 @@ public class ExpertInfoController {
             }
         }
         return Result.success("修改成功");
+    }
+    /**
+     * 展现所有专家信息
+     */
+    @GetMapping("/search")
+    public Result search(){
+        List<ExpertInfo> expertList=expertInfoService.selectAll();
+        return Result.success(expertList);
+
     }
 }
