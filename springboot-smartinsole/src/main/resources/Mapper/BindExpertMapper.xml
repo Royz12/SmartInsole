@@ -4,4 +4,12 @@
 <mapper namespace="com.graduationdesign.springbootsmartinsole.mapper.BindExpertMapper">
 
 
+    <insert id="bind">
+        insert into bind_expert(sportman_id,expert_id,bind)
+        values (#{sportman_id},#{expert_id},1)
+    </insert>
+    <delete id="cancel">
+        update bind_expert set bind=0
+        where sportman_id=#{sportman_id} and expert_id=#{expert_id}
+    </delete>
 </mapper>
