@@ -5,6 +5,8 @@ import com.graduationdesign.springbootsmartinsole.mapper.NewsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class NewsService {
     @Autowired
@@ -13,4 +15,7 @@ public class NewsService {
         newsMapper.insert(news);
     }
 
+    public List<News> selectAll() {
+        return newsMapper.selectAll();
+    }
 }

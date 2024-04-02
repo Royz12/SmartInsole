@@ -8,4 +8,7 @@
         insert into advice(sportman_id,sportman_name,expert_id,expert_name,advice)
         values (#{sportman_id},#{sportman_name},#{expert_id},#{expert_name},#{advice})
     </insert>
+    <select id="show" resultType="java.lang.String">
+        select advice from advice where sportman_id=#{sportman_id} and expert_id=#{expert_id}
+    </select>
 </mapper>

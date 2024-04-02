@@ -1,15 +1,23 @@
 package com.graduationdesign.springbootsmartinsole.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class News {
     private int news_id;
     private int expert_id;
     private String expert_name;
-    private String news_time;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date news_time;
     private String news;
 
     public int getNews_id() {
@@ -36,11 +44,12 @@ public class News {
         this.expert_name = expert_name;
     }
 
-    public String getNews_time() {
+    public Date getNews_time() {
         return news_time;
     }
+    public void setNews_time(){}
 
-    public void setNews_time(String news_time) {
+    public void setNews_time(Date news_time) {
         this.news_time = news_time;
     }
 
@@ -51,4 +60,5 @@ public class News {
     public void setNews(String news) {
         this.news = news;
     }
+    public void setNews(){}
 }

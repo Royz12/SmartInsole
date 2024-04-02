@@ -3,9 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.graduationdesign.springbootsmartinsole.mapper.NewsMapper">
     <insert id="insert">
-        insert into news(expert_id,expert_name,news_time,news)
-        values (#{expert_id},#{expert_name},#{news_time},#{news})
+        insert into news(expert_id,news_time,news)
+        values (#{expert_id},#{news_time},#{news})
     </insert>
+    <select id="selectAll" resultType="com.graduationdesign.springbootsmartinsole.entity.News">
+        select * from news
+    </select>
 
 
 </mapper>

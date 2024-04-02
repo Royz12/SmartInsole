@@ -4,10 +4,9 @@ import com.graduationdesign.springbootsmartinsole.common.Result;
 import com.graduationdesign.springbootsmartinsole.entity.News;
 import com.graduationdesign.springbootsmartinsole.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/news")
@@ -23,5 +22,12 @@ public class NewsController {
         newsService.insertNews(news);
         return Result.success();
     }
-
+    /**
+     * 展现新闻
+     */
+    @GetMapping("/show")
+    public Result show(){
+        List<News> newsList = newsService.selectAll();
+        return Result.success(newsList);
+    }
 }

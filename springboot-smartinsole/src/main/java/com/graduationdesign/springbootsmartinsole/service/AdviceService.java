@@ -12,4 +12,8 @@ public class AdviceService {
     public void insertAdvice(Advice advice) {
         adviceMapper.insert(advice);
     }
+
+    public String show(Advice advice) {
+        return adviceMapper.show(advice);
+    }
 }
