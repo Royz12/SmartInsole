@@ -9,9 +9,8 @@
         values (#{sportman_id},#{password},#{sportman_name},#{phonenumber},#{height},#{weight},#{selfintro},#{profile_picture})
     </insert>
 
-    <select id="login" resultType="com.graduationdesign.springbootsmartinsole.entity.SportmanInfo">
-        select * from sportmaninfo
-        where phonenumber = #{phonenumber} and password = #{password}
+    <select id="FindByPass" resultType="java.lang.String">
+        select password from sportmaninfo where phonenumber=#{phonenumber}
     </select>
 
 </mapper>

@@ -1,10 +1,11 @@
 package com.graduationdesign.springbootsmartinsole.controller;
 
 import com.graduationdesign.springbootsmartinsole.common.Result;
+import com.graduationdesign.springbootsmartinsole.controller.dto.SportmanInfoDto;
 import com.graduationdesign.springbootsmartinsole.entity.SportmanInfo;
-import com.graduationdesign.springbootsmartinsole.entity.User;
 import com.graduationdesign.springbootsmartinsole.service.SportmanInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,18 +36,18 @@ public class SportmanInfoController {
         return Result.success();
     }
 
+    /**
+     * 运动员登录
+     * @param SportmanInfoDto
+     */
     @PostMapping("/login")
-    public Result login(@RequestBody SportmanInfo sportman) {
-        SportmanInfo sportmaninfo;
-        try {
-            sportmaninfo = sportmanInfoService.login(sportman);
-        } catch (Exception e) {
-            if (e instanceof DuplicateFormatFlagsException) {
-                return Result.error("插入数据库错误");
-            } else {
-                return Result.error("系统错误");
-            }
+    public Result login(@RequestBody SportmanInfoDto SportmanInfoDto){
+        String PhoneNumber=SportmanInfoDto.getPhonenumber();
+        String Password=SportmanInfoDto.getPassword();
+        if( StringUtils.isEmpty(PhoneNumber) || StringUtils.isEmpty(Password)){
+            return Result.error("请输入手机号或密码");
+        }else{
+            return sportmanInfoService.login(SportmanInfoDto);
         }
-        return Result.success(sportmaninfo);
     }
 }
