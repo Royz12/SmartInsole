@@ -23,4 +23,12 @@ public class ExpertInfoService {
             return Result.error("登录失败");
         }
     }
+
+    public void updateInfo(ExpertInfo expertInfo) {
+        expertInfoMapper.update(expertInfo);
+    }
+
+    public void modifyPass(ExpertInfo expertInfo) {
+        expertInfoMapper.modifyPass(expertInfo);
+    }
 }

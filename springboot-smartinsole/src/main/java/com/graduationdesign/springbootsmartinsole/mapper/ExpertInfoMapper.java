@@ -8,4 +8,8 @@ public interface ExpertInfoMapper {
     void insert(ExpertInfo expertInfo);
 
     String FindByPass(String phonenumber);
+
+    void update(ExpertInfo expertInfo);
+
+    void modifyPass(ExpertInfo expertInfo);
 }

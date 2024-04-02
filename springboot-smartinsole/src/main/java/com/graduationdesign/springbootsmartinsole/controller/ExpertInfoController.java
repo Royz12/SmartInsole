@@ -50,4 +50,38 @@ public class ExpertInfoController {
             return expertInfoService.login(expertInfoDto);
         }
     }
+    /**
+     * 专家信息修改
+     * @param expertInfo
+     */
+    @PostMapping("/update")
+    public Result update(@RequestBody ExpertInfo expertInfo){
+        try{
+            expertInfoService.updateInfo(expertInfo);
+        }catch (Exception e){
+            if(e instanceof DuplicateFormatFlagsException){
+                return Result.error("修改信息失败");
+            }else{
+                return Result.error("系统错误");
+            }
+        }
+        return Result.success(expertInfo);
+    }
+    /**
+     * 专家密码修改
+     * @param expertInfo
+     */
+    @PostMapping("/modifypass")
+    public Result modify(@RequestBody ExpertInfo expertInfo){
+        try{
+            expertInfoService.modifyPass(expertInfo);
+        }catch (Exception e){
+            if(e instanceof DuplicateFormatFlagsException){
+                return Result.error("修改密码失败");
+            }else{
+                return Result.error("系统错误");
+            }
+        }
+        return Result.success("修改成功");
+    }
 }
