@@ -2,6 +2,7 @@ package com.graduationdesign.springbootsmartinsole.service;
 
 import com.graduationdesign.springbootsmartinsole.common.Result;
 import com.graduationdesign.springbootsmartinsole.controller.dto.SportmanInfoDto;
+import com.graduationdesign.springbootsmartinsole.entity.ExpertInfo;
 import com.graduationdesign.springbootsmartinsole.entity.SportmanInfo;
 import com.graduationdesign.springbootsmartinsole.mapper.SportmanInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,18 @@ public class SportmanInfoService {
     }
 
     public Result login(SportmanInfoDto SportmanInfoDto) {
-        String s=sportmanInfoMapper.FindByPass(SportmanInfoDto.getPhonenumber());
-        if(s.equals(SportmanInfoDto.getPassword())){
-            return Result.success(SportmanInfoDto);
+        SportmanInfo s=sportmanInfoMapper.FindByPass(SportmanInfoDto.getPhonenumber());
+        if(s.getPassword().equals(SportmanInfoDto.getPassword())){
+            return Result.success(s);
         }else{
             return Result.error("登录失败");
         }
+    }
+    public void updateInfo(SportmanInfo sportmanInfo) {
+        sportmanInfoMapper.update(sportmanInfo);
+    }
+
+    public void modifyPass(SportmanInfo sportmanInfo) {
+        sportmanInfoMapper.modifyPass(sportmanInfo);
     }
 }

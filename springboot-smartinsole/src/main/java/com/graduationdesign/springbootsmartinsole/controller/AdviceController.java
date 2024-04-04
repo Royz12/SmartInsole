@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.DuplicateFormatFlagsException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/advice")
@@ -35,7 +36,8 @@ public class AdviceController {
          */
         @GetMapping("/show")
         public Result show(@RequestBody Advice advice){
-            String s=adviceService.show(advice);
+            List<Advice> s=adviceService.show(advice);
+            System.out.println(s);
             return Result.success(s);
         }
 

@@ -5,6 +5,8 @@ import com.graduationdesign.springbootsmartinsole.mapper.AdviceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdviceService {
     @Autowired
@@ -13,7 +15,7 @@ public class AdviceService {
         adviceMapper.insert(advice);
     }
 
-    public String show(Advice advice) {
+    public List<Advice> show(Advice advice) {
         return adviceMapper.show(advice);
     }
 }

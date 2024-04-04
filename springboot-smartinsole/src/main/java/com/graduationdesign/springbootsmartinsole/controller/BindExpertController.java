@@ -4,12 +4,10 @@ import com.graduationdesign.springbootsmartinsole.common.Result;
 import com.graduationdesign.springbootsmartinsole.entity.BindExpert;
 import com.graduationdesign.springbootsmartinsole.service.BindExpertService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.DuplicateFormatFlagsException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/bindexpert")
@@ -49,5 +47,13 @@ public class BindExpertController {
             }
         }
         return Result.success(bindExpert);
+    }
+    /**
+     * 输出绑定对应专家的运动员id
+     */
+    @PostMapping("/search")
+    public Result search(@RequestBody BindExpert bindExpert){
+        List<BindExpert> list=bindExpertService.search(bindExpert);
+        return Result.success(list);
     }
 }

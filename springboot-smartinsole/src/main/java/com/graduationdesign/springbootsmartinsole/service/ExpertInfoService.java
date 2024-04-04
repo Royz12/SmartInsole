@@ -18,9 +18,9 @@ public class ExpertInfoService {
     }
 
     public Result login(ExpertInfoDto expertInfoDto) {
-        String s=expertInfoMapper.FindByPass(expertInfoDto.getPhonenumber());
-        if(s.equals(expertInfoDto.getPassword())){
-            return Result.success(expertInfoDto);
+        ExpertInfo s=expertInfoMapper.FindByPass(expertInfoDto.getPhonenumber());
+        if(s.getPassword().equals(expertInfoDto.getPassword())){
+            return Result.success(s);
         }else{
             return Result.error("登录失败");
         }

@@ -9,7 +9,7 @@ import java.util.List;
 public interface ExpertInfoMapper {
     void insert(ExpertInfo expertInfo);
 
-    String FindByPass(String phonenumber);
+    ExpertInfo FindByPass(String phonenumber);
 
     void update(ExpertInfo expertInfo);
 

@@ -88,6 +88,5 @@ public class ExpertInfoController {
     public Result search(){
         List<ExpertInfo> expertList=expertInfoService.selectAll();
         return Result.success(expertList);
-
     }
 }
