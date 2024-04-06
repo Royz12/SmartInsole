@@ -17,7 +17,7 @@
         <if test="phonenumber!=null">
             ,phonenumber=#{phonenumber}
         </if>
-        <if test="worktime!=null">
+        <if test="worktime!=0">
             ,worktime=#{worktime}
         </if>
         <if test="selfintro!=null">

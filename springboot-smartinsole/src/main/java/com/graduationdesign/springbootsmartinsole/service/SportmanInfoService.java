@@ -18,6 +18,9 @@ public class SportmanInfoService {
 
     public Result login(SportmanInfoDto SportmanInfoDto) {
         SportmanInfo s=sportmanInfoMapper.FindByPass(SportmanInfoDto.getPhonenumber());
+        if (s==null){
+            return Result.error("用户不存在");
+        }
         if(s.getPassword().equals(SportmanInfoDto.getPassword())){
             return Result.success(s);
         }else{
