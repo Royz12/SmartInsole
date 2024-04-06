@@ -24,6 +24,12 @@ public class RightInsole {
     private String r12;
     private String r13;
     private String right_time;
+    private String average_0;
+    private String average_1;
+    private String average_2;
+    private String average_3;
+    private String average_4;
+    private String total;
 
     public String getRight_id() {
         return right_id;

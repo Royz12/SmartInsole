@@ -8,8 +8,8 @@ import lombok.Data;
 public class BindInsole {
     private int record_id;
     private int sportman_id;
-    private int left_id;
-    private int right_id;
+    private String left_id;
+    private String right_id;
     private int bind;
 
     public int getRecord_id() {
@@ -28,19 +28,19 @@ public class BindInsole {
         this.sportman_id = sportman_id;
     }
 
-    public int getLeft_id() {
+    public String getLeft_id() {
         return left_id;
     }
 
-    public void setLeft_id(int left_id) {
+    public void setLeft_id(String left_id) {
         this.left_id = left_id;
     }
 
-    public int getRight_id() {
+    public String getRight_id() {
         return right_id;
     }
 
-    public void setRight_id(int right_id) {
+    public void setRight_id(String right_id) {
         this.right_id = right_id;
     }
 

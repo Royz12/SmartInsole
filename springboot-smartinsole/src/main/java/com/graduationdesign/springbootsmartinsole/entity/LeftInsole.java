@@ -24,6 +24,13 @@ public class LeftInsole {
     private String l12;
     private String l13;
     private String left_time;
+    private String average_0;
+    private String average_1;
+    private String average_2;
+    private String average_3;
+    private String average_4;
+    private String total;
+
 
     public String getLeft_id() {
         return left_id;

@@ -68,7 +68,7 @@ public class SportmanInfoController {
         return Result.success(sportmanInfo);
     }
     /**
-     * 专家密码修改
+     * 用户密码修改
      * @param sportmanInfo
      */
     @PostMapping("/modifypass")
