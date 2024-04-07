@@ -17,4 +17,12 @@ public class SportAnalysisService {
     public double getrightavg(SportmanInfo sportmanInfo) {
         return sportAnalysisMapper.getrightavg(sportmanInfo);
     }
+
+    public int getrightdir(SportmanInfo sportmanInfo) {
+        return sportAnalysisMapper.getrightdir(sportmanInfo);
+    }
+
+    public int getrightleft(SportmanInfo sportmanInfo) {
+        return sportAnalysisMapper.getleftdir(sportmanInfo);
+    }
 }

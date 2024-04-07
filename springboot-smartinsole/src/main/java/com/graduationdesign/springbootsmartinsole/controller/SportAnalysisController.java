@@ -34,4 +34,25 @@ public class SportAnalysisController {
         double s =  sportAnalysisService.getrightavg(sportmanInfo);
         return Result.success(s);
     }
+    /**
+     * 左脚鞋垫压力偏向
+     * @param sportmanInfo
+     * @output -1 -2 -3 -4
+     */
+    @PostMapping("/leftdir")
+    public Result leftdir(@RequestBody SportmanInfo sportmanInfo){
+        int dir = sportAnalysisService.getrightleft(sportmanInfo);
+        return Result.success(dir);
+    }
+    /**
+     * 右脚鞋垫压力偏向
+     * @param sportmanInfo -1 -2 -3 -4
+     * @output -1 -2 -3 -4
+     */
+    @PostMapping("/rightdir")
+    public Result rightdir(@RequestBody SportmanInfo sportmanInfo){
+        int dir = sportAnalysisService.getrightdir(sportmanInfo);
+        return Result.success(dir);
+    }
+
 }

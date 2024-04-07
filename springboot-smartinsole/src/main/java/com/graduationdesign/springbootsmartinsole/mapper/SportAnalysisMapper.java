@@ -9,4 +9,8 @@ public interface SportAnalysisMapper {
     double getleftavg(SportmanInfo sportmanInfo);
 
     double getrightavg(SportmanInfo sportmanInfo);
+
+    int getrightdir(SportmanInfo sportmanInfo);
+
+    int getleftdir(SportmanInfo sportmanInfo);
 }

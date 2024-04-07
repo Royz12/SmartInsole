@@ -12,4 +12,58 @@
         SELECT AVG(r.total) from rightinsole r,bind_insole b
         WHERE r.rightid=b.right_id AND b.sportman_id=#{sportman_id} AND b.bind=1
     </select>
+    <select id="getrightdir" resultType="java.lang.Integer">
+        SELECT
+            (CASE
+                 WHEN max_sum = sum_right_1 THEN 1
+                 WHEN max_sum = sum_right_2 THEN 2
+                 WHEN max_sum = sum_right_3 THEN 3
+                 WHEN max_sum = sum_right_4 THEN 4
+                END) AS remark
+        FROM
+            (SELECT
+                 rightid,
+                 SUM(average_1) AS sum_right_1,
+                 SUM(average_2) AS sum_right_2,
+                 SUM(average_3) AS sum_right_3,
+                 SUM(average_4) AS sum_right_4,
+                 greatest(SUM(average_1) ,SUM(average_2) ,SUM(average_3) ,SUM(average_4))  AS max_sum
+             FROM
+                 rightinsole
+             GROUP BY
+                 rightid) rightinsole
+                INNER JOIN
+            bind_insole b ON rightinsole.rightid = b.right_id
+        WHERE
+            b.sportman_id = #{sportman_id}
+          AND b.bind = 1;
+    </select>
+    <select id="getleftdir" resultType="java.lang.Integer">
+        SELECT
+            (CASE
+                 WHEN max_sum = sum_left_1 THEN 1
+                 WHEN max_sum = sum_left_2 THEN 2
+                 WHEN max_sum = sum_left_3 THEN 3
+                 WHEN max_sum = sum_left_4 THEN 4
+                END) AS remark
+        FROM
+            (SELECT
+                 leftid,
+                 SUM(average_1) AS sum_left_1,
+                 SUM(average_2) AS sum_left_2,
+                 SUM(average_3) AS sum_left_3,
+                 SUM(average_4) AS sum_left_4,
+                 greatest(SUM(average_1) ,SUM(average_2) ,SUM(average_3) ,SUM(average_4))  AS max_sum
+             FROM
+                 leftinsole
+             GROUP BY
+                 leftid) leftinsole
+                INNER JOIN
+            bind_insole b ON leftinsole.leftid = b.left_id
+        WHERE
+            b.sportman_id = #{sportman_id}
+          AND b.bind = 1;
+
+    </select>
+
 </mapper>
