@@ -40,4 +40,8 @@ public class ExpertInfoService {
     public List<ExpertInfo> selectAll() {
         return expertInfoMapper.selectAll();
     }
+
+    public List<ExpertInfo> search(ExpertInfo expertInfo) {
+        return expertInfoMapper.search(expertInfo);
+    }
 }

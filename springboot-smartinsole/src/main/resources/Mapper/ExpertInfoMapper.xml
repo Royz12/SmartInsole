@@ -41,5 +41,8 @@
     <select id="selectAll" resultType="com.graduationdesign.springbootsmartinsole.entity.ExpertInfo">
         select * from expertinfo
     </select>
+    <select id="search" resultType="com.graduationdesign.springbootsmartinsole.entity.ExpertInfo">
+        select * from expertinfo where expert_name=#{expert_name}
+    </select>
 
 </mapper>

@@ -22,6 +22,7 @@ public class BindExpertController {
     public Result bind(@RequestBody BindExpert bindExpert){
         try{
             bindExpertService.bindEx(bindExpert);
+            bindExpertService.update_bind(bindExpert);
         }catch (Exception e){
             if(e instanceof DuplicateFormatFlagsException){
                 return Result.error("数据库错误");
@@ -39,6 +40,7 @@ public class BindExpertController {
     public Result cancel(@RequestBody BindExpert bindExpert){
         try{
             bindExpertService.cancelEx(bindExpert);
+            bindExpertService.update_cancel(bindExpert);
         }catch (Exception e){
             if(e instanceof DuplicateFormatFlagsException){
                 return Result.error("数据库错误");

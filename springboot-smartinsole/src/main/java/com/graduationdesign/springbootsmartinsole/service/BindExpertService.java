@@ -23,4 +23,12 @@ public class BindExpertService {
     public List<BindExpert> search(BindExpert bindExpert) {
         return bindExpertMapper.search(bindExpert);
     }
+
+    public void update_bind(BindExpert bindExpert) {
+        bindExpertMapper.update_bind(bindExpert);
+    }
+
+    public void update_cancel(BindExpert bindExpert) {
+        bindExpertMapper.update_cancel(bindExpert);
+    }
 }

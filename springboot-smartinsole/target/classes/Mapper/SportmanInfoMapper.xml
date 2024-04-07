@@ -25,10 +25,10 @@
         <if test="phonenumber!=null">
             ,phonenumber=#{phonenumber}
         </if>
-        <if test="height!=null">
+        <if test="height!=0">
             ,height=#{height}
         </if>
-        <if test="weight!=null">
+        <if test="weight!=0">
             ,weight=#{weight}
         </if>
         <if test="profile_picture!=null">
