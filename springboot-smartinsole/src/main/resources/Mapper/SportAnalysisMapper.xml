@@ -4,4 +4,12 @@
 <mapper namespace="com.graduationdesign.springbootsmartinsole.mapper.SportAnalysisMapper">
 
 
+    <select id="getleftavg" resultType="java.lang.Double">
+        SELECT AVG(l.total) from leftinsole l,bind_insole b
+        WHERE l.leftid=b.left_id AND b.sportman_id=#{sportman_id} AND b.bind=1
+    </select>
+    <select id="getrightavg" resultType="java.lang.Double">
+        SELECT AVG(r.total) from rightinsole r,bind_insole b
+        WHERE r.rightid=b.right_id AND b.sportman_id=#{sportman_id} AND b.bind=1
+    </select>
 </mapper>
