@@ -4,12 +4,4 @@
 <mapper namespace="com.graduationdesign.springbootsmartinsole.mapper.BindInsoleMapper">
 
 
-    <insert id="bind">
-        insert into bind_insole(sportman_id,left_id,right_id,bind)
-        values (#{sportman_id},#{left_id},#{right_id},1)
-    </insert>
-    <update id="cancel">
-        update bind_insole set bind=0
-        where sportman_id=#{sportman_id} and left_id=#{left_id} and right_id=#{right_id}
-    </update>
 </mapper>
