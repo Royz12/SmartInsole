@@ -84,9 +84,15 @@ public class ExpertInfoController {
     /**
      * 展现所有专家信息
      */
-    @GetMapping("/search")
-    public Result search(){
+    @GetMapping("/list")
+    public Result list(){
         List<ExpertInfo> expertList=expertInfoService.selectAll();
+        return Result.success(expertList);
+    }
+
+    @PostMapping("/search")
+    public Result search(@RequestBody ExpertInfo expertInfo){
+        List<ExpertInfo> expertList=expertInfoService.search(expertInfo);
         return Result.success(expertList);
     }
 }

@@ -19,6 +19,9 @@ public class ExpertInfoService {
 
     public Result login(ExpertInfoDto expertInfoDto) {
         ExpertInfo s=expertInfoMapper.FindByPass(expertInfoDto.getPhonenumber());
+        if (s==null){
+            return Result.error("用户不存在");
+        }
         if(s.getPassword().equals(expertInfoDto.getPassword())){
             return Result.success(s);
         }else{
@@ -36,5 +39,9 @@ public class ExpertInfoService {
 
     public List<ExpertInfo> selectAll() {
         return expertInfoMapper.selectAll();
+    }
+
+    public List<ExpertInfo> search(ExpertInfo expertInfo) {
+        return expertInfoMapper.search(expertInfo);
     }
 }

@@ -16,4 +16,6 @@ public interface ExpertInfoMapper {
     void modifyPass(ExpertInfo expertInfo);
 
     List<ExpertInfo> selectAll();
+
+    List<ExpertInfo> search(ExpertInfo expertInfo);
 }

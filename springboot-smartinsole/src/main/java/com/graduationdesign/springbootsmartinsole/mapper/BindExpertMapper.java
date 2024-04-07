@@ -12,4 +12,8 @@ public interface BindExpertMapper {
     void cancel(BindExpert bindExpert);
 
     List<BindExpert> search(BindExpert bindExpert);
+
+    void update_bind(BindExpert bindExpert);
+
+    void update_cancel(BindExpert bindExpert);
 }
