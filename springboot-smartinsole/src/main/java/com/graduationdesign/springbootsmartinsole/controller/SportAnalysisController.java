@@ -1,6 +1,7 @@
 package com.graduationdesign.springbootsmartinsole.controller;
 
 import com.graduationdesign.springbootsmartinsole.common.Result;
+import com.graduationdesign.springbootsmartinsole.entity.SportAnalysis;
 import com.graduationdesign.springbootsmartinsole.entity.SportmanInfo;
 import com.graduationdesign.springbootsmartinsole.service.SportAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,13 @@ public class SportAnalysisController {
         int dir = sportAnalysisService.getrightdir(sportmanInfo);
         return Result.success(dir);
     }
-
+    /**
+     * 记录分析数据
+     * @param sport_analysis
+     */
+    @PostMapping("/addrecord")
+    public Result addRecord(@RequestBody SportAnalysis sport_analysis){
+        sportAnalysisService.addRecord(sport_analysis);
+        return Result.success(sport_analysis);
+    }
 }

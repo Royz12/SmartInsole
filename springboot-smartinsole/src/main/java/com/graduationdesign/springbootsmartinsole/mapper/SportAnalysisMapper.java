@@ -1,5 +1,6 @@
 package com.graduationdesign.springbootsmartinsole.mapper;
 
+import com.graduationdesign.springbootsmartinsole.entity.SportAnalysis;
 import com.graduationdesign.springbootsmartinsole.entity.SportmanInfo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,4 +14,6 @@ public interface SportAnalysisMapper {
     int getrightdir(SportmanInfo sportmanInfo);
 
     int getleftdir(SportmanInfo sportmanInfo);
+
+    void addRecord(SportAnalysis sportAnalysis);
 }

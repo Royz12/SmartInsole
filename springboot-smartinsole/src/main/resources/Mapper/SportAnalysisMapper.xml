@@ -2,8 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.graduationdesign.springbootsmartinsole.mapper.SportAnalysisMapper">
-
-
+    <insert id="addRecord">
+        insert into sport_analysis(sportman_id,left_average,right_average,left_result,right_result)
+        values (#{sportman_id},#{left_average},#{right_average},#{left_result},#{right_result})
+    </insert>
     <select id="getleftavg" resultType="java.lang.Double">
         SELECT AVG(l.total) from leftinsole l,bind_insole b
         WHERE l.leftid=b.left_id AND b.sportman_id=#{sportman_id} AND b.bind=1
@@ -15,10 +17,10 @@
     <select id="getrightdir" resultType="java.lang.Integer">
         SELECT
             (CASE
-                 WHEN max_sum = sum_right_1 THEN 1
-                 WHEN max_sum = sum_right_2 THEN 2
-                 WHEN max_sum = sum_right_3 THEN 3
-                 WHEN max_sum = sum_right_4 THEN 4
+                 WHEN max_sum = sum_right_1 THEN '1'
+                 WHEN max_sum = sum_right_2 THEN '2'
+                 WHEN max_sum = sum_right_3 THEN '3'
+                 WHEN max_sum = sum_right_4 THEN '4'
                 END) AS remark
         FROM
             (SELECT
@@ -41,10 +43,10 @@
     <select id="getleftdir" resultType="java.lang.Integer">
         SELECT
             (CASE
-                 WHEN max_sum = sum_left_1 THEN 1
-                 WHEN max_sum = sum_left_2 THEN 2
-                 WHEN max_sum = sum_left_3 THEN 3
-                 WHEN max_sum = sum_left_4 THEN 4
+                 WHEN max_sum = sum_left_1 THEN '1'
+                 WHEN max_sum = sum_left_2 THEN '2'
+                 WHEN max_sum = sum_left_3 THEN '3'
+                 WHEN max_sum = sum_left_4 THEN '4'
                 END) AS remark
         FROM
             (SELECT
