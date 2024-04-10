@@ -2,9 +2,11 @@ package com.graduationdesign.springbootsmartinsole.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class SportmanInfo {
     private int sportman_id;
     private String password;

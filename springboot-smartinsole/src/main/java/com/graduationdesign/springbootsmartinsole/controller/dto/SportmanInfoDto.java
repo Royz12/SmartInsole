@@ -2,9 +2,11 @@ package com.graduationdesign.springbootsmartinsole.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class SportmanInfoDto {
     private int sportman_id;
     private String password;

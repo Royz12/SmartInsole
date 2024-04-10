@@ -13,6 +13,10 @@
         select * from sportmaninfo where phonenumber=#{phonenumber}
     </select>
 
+    <select id="searchById" resultType="com.graduationdesign.springbootsmartinsole.entity.SportmanInfo">
+        select * from sportmaninfo where sportman_id=#{sportman_id}
+    </select>
+
 
     <update id="update">
         update sportmaninfo set

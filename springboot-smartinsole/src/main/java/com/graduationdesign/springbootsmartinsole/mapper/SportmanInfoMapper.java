@@ -7,6 +7,10 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface SportmanInfoMapper {
+
+
+    SportmanInfo searchById(SportmanInfo sportmanInfo);
+
     void insert(SportmanInfo sportmanInfo);
 
     SportmanInfo FindByPass(String phonenumber);
