@@ -1,5 +1,6 @@
 package com.graduationdesign.springbootsmartinsole.mapper;
 
+import com.graduationdesign.springbootsmartinsole.entity.BindExpert;
 import com.graduationdesign.springbootsmartinsole.entity.ExpertInfo;
 import com.graduationdesign.springbootsmartinsole.entity.SportAnalysis;
 import com.graduationdesign.springbootsmartinsole.entity.SportmanInfo;
@@ -20,7 +21,7 @@ public interface SportAnalysisMapper {
 
     void addRecord(SportAnalysis sportAnalysis);
 
-    List<Integer> search_record_idList(ExpertInfo expertInfo);
+
 
     SportAnalysis getleft_little_avg(SportmanInfo sportmanInfo);
 
@@ -29,4 +30,6 @@ public interface SportAnalysisMapper {
     SportAnalysis getrecord(SportmanInfo sportmanInfo);
 
     void updateRecord(SportAnalysis sportAnalysis);
+
+    List<BindExpert> search_record_idList(ExpertInfo expertInfo);
 }

@@ -93,10 +93,6 @@
 
     </select>
 
-    <select id="search_record_idList" resultType="java.lang.Integer">
-        select record_id from bind_expert where expert_id = #{expert_id} and bind!=0;
-    </select>
-
     <select id="getleft_little_avg" resultType="com.graduationdesign.springbootsmartinsole.entity.SportAnalysis">
         SELECT AVG(average_1) AS left_result_1,AVG(average_2) AS left_result_2,AVG(average_3) AS left_result_3,AVG(average_4) AS left_result_4
         FROM leftinsole
@@ -115,6 +111,10 @@
 
     <select id="getrecord" resultType="com.graduationdesign.springbootsmartinsole.entity.SportAnalysis">
         select * from sport_analysis where sportman_id=#{sportman_id}
+    </select>
+
+    <select id="search_record_idList" resultType="com.graduationdesign.springbootsmartinsole.entity.BindExpert">
+        select * from bind_expert where expert_id = #{expert_id} and bind!=0;
     </select>
 
 </mapper>

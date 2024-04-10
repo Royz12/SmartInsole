@@ -4,7 +4,7 @@ import com.graduationdesign.springbootsmartinsole.common.Result;
 import com.graduationdesign.springbootsmartinsole.entity.ExpertInfo;
 import com.graduationdesign.springbootsmartinsole.entity.SportAnalysis;
 import com.graduationdesign.springbootsmartinsole.entity.SportmanInfo;
-import com.graduationdesign.springbootsmartinsole.entity.data;
+import com.graduationdesign.springbootsmartinsole.entity.Data;
 import com.graduationdesign.springbootsmartinsole.service.SportAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,18 +63,24 @@ public class SportAnalysisController {
      * 记录分析数据
      */
     @PostMapping("/addrecord")
-    public Result addRecord(@RequestBody SportmanInfo sportmanInfo){
-        SportAnalysis sportAnalysis;
-        sportAnalysis=sportAnalysisService.addRecord(sportmanInfo);
-        return Result.success(sportAnalysis);
+    public Result addRecord(@RequestBody ExpertInfo expertInfo){
+        sportAnalysisService.addRecord(expertInfo);
+        return Result.success("更新成功");
     }
 
+    @PostMapping("/searchrecord")
+    public Result searchRecord(@RequestBody SportmanInfo sportmanInfo){
+        SportAnalysis sportAnalysis;
+        sportAnalysis=sportAnalysisService.searchRecord(sportmanInfo);
+        return Result.success(sportAnalysis);
+    }
     /**
      * 返回数据可视化所需数据
      */
     @PostMapping("/echarts_data")
     public Result echarts_data(@RequestBody ExpertInfo expertInfo){
-        List<data> result=sportAnalysisService.echarts_data(expertInfo);
+        List<Data> result=sportAnalysisService.echarts_data(expertInfo);
+//        System.out.println(result);
         return Result.success(result);
     }
 }

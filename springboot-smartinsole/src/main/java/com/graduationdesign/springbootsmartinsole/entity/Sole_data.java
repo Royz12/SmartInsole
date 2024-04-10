@@ -2,10 +2,12 @@ package com.graduationdesign.springbootsmartinsole.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-public class sole_data {
+@NoArgsConstructor
+public class Sole_data {
     String name;
-    int[] value = new int[4];
+    double[] value = new double[4];
 }
