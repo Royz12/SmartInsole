@@ -18,4 +18,5 @@ public interface ExpertInfoMapper {
     List<ExpertInfo> selectAll();
 
     List<ExpertInfo> search(ExpertInfo expertInfo);
+
 }

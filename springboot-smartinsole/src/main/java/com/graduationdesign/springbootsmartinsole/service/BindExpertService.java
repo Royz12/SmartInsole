@@ -2,6 +2,7 @@ package com.graduationdesign.springbootsmartinsole.service;
 
 import com.graduationdesign.springbootsmartinsole.common.Result;
 import com.graduationdesign.springbootsmartinsole.entity.BindExpert;
+import com.graduationdesign.springbootsmartinsole.entity.ExpertInfo;
 import com.graduationdesign.springbootsmartinsole.mapper.BindExpertMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,9 @@ public class BindExpertService {
 
     public void update_cancel(BindExpert bindExpert) {
         bindExpertMapper.update_cancel(bindExpert);
+    }
+
+    public List<ExpertInfo> search_history(BindExpert bindExpert) {
+        return bindExpertMapper.search_history(bindExpert);
     }
 }

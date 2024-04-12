@@ -7,7 +7,7 @@
         values (#{expert_id},#{news_time},#{news})
     </insert>
     <select id="selectAll" resultType="com.graduationdesign.springbootsmartinsole.entity.News">
-        select * from news
+        select news from news where expert_id=#{expert_id}
     </select>
 
 

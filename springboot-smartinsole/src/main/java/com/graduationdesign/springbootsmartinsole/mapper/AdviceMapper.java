@@ -9,5 +9,9 @@ import java.util.List;
 public interface AdviceMapper {
     void insert(Advice advice);
 
-    List<Advice> show(Advice advice);
+    List<Advice> show_advice(Advice advice);
+
+    List<Advice> show_all(Advice advice);
+
+    String findByid(int advice);
 }

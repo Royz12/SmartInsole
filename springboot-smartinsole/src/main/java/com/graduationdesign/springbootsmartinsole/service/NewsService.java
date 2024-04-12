@@ -1,5 +1,6 @@
 package com.graduationdesign.springbootsmartinsole.service;
 
+import com.graduationdesign.springbootsmartinsole.entity.ExpertInfo;
 import com.graduationdesign.springbootsmartinsole.entity.News;
 import com.graduationdesign.springbootsmartinsole.mapper.NewsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class NewsService {
         newsMapper.insert(news);
     }
 
-    public List<News> selectAll() {
-        return newsMapper.selectAll();
+    public List<News> selectAll(ExpertInfo expertInfo) {
+        return newsMapper.selectAll(expertInfo);
     }
 }

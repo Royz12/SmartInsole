@@ -26,4 +26,8 @@
     <select id="searchListByexpert_id" resultType="com.graduationdesign.springbootsmartinsole.entity.BindExpert">
         select * from bind_expert where expert_id=#{expert_id}
     </select>
+    <select id="search_history" resultType="com.graduationdesign.springbootsmartinsole.entity.ExpertInfo">
+        select * from expertinfo where expert_id in
+                                       (select expert_id from bind_expert where sportman_id=#{sportman_id})
+    </select>
 </mapper>
