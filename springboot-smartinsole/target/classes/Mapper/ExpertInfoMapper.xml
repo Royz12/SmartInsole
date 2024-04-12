@@ -6,6 +6,7 @@
         insert into expertinfo(expert_id,password,expert_name,phonenumber,height,weight,worktime,selfintro,profile_picture)
         values(#{expert_id},#{password},#{expert_name},#{phonenumber},#{height},#{weight},#{worktime},#{selfintro},#{profile_picture})
     </insert>
+
     <update id="update">
         update expertinfo set
         <if test="expert_id!=null">

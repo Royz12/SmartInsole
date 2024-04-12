@@ -8,9 +8,18 @@
         insert into advice(sportman_id,expert_id,advice)
         values (#{sportman_id},#{expert_id},#{advice})
     </insert>
-    <select id="show" resultType="com.graduationdesign.springbootsmartinsole.entity.Advice">
+    <select id="show_advice" resultType="com.graduationdesign.springbootsmartinsole.entity.Advice">
         select * from advice
+        where sportman_id=#{sportman_id} and expert_id=#{expert_id}
+    </select>
+    <select id="show_all" resultType="com.graduationdesign.springbootsmartinsole.entity.Advice">
+        select * from advice
+        where expert_id=#{expert_id}
+    </select>
+    <select id="findByid" resultType="java.lang.String">
+        select sportman_name from sportmaninfo
         where sportman_id=#{sportman_id}
     </select>
+
 
 </mapper>
