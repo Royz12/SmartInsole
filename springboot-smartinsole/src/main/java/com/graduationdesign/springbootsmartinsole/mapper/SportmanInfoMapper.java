@@ -17,4 +17,6 @@ public interface SportmanInfoMapper {
     void update(SportmanInfo sportmanInfo);
 
     void modifyPass(SportmanInfo sportmanInfo);
+
+    SportmanInfo FindByPh(String phonenumber);
 }

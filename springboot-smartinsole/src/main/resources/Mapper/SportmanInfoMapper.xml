@@ -16,6 +16,9 @@
     <select id="searchById" resultType="com.graduationdesign.springbootsmartinsole.entity.SportmanInfo">
         select * from sportmaninfo where sportman_id=#{sportman_id}
     </select>
+    <select id="FindByPh" resultType="com.graduationdesign.springbootsmartinsole.entity.SportmanInfo">
+        select * from sportmaninfo where phonenumber=#{phonenumber}
+    </select>
 
 
     <update id="update">

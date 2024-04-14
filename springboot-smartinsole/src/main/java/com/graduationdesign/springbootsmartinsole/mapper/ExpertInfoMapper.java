@@ -19,4 +19,5 @@ public interface ExpertInfoMapper {
 
     List<ExpertInfo> search(ExpertInfo expertInfo);
 
+    ExpertInfo FindByPh(String phonenumber);
 }

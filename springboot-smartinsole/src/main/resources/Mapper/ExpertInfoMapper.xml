@@ -43,7 +43,16 @@
         select * from expertinfo
     </select>
     <select id="search" resultType="com.graduationdesign.springbootsmartinsole.entity.ExpertInfo">
-        select * from expertinfo where expert_name=#{expert_name}
+        select * from expertinfo where
+        <if test="expert_name!=null">
+            expert_name=#{expert_name}
+        </if>
+        <if test="worktime!=null">
+            and worktime=#{worktime}
+        </if>
+    </select>
+    <select id="FindByPh" resultType="com.graduationdesign.springbootsmartinsole.entity.ExpertInfo">
+        select * from expertinfo where phonenumber=#{phonenumber}
     </select>
 
 </mapper>

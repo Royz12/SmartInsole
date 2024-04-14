@@ -13,8 +13,14 @@ import java.util.List;
 public class ExpertInfoService {
     @Autowired
     private ExpertInfoMapper expertInfoMapper;
-    public void insertExpert(ExpertInfo expertInfo){
-        expertInfoMapper.insert(expertInfo);
+    public Result insertExpert(ExpertInfo expertInfo){
+        ExpertInfo s = expertInfoMapper.FindByPh(expertInfo.getPhonenumber());
+        if(s==null){
+            expertInfoMapper.insert(expertInfo);
+            return Result.success();
+        }else{
+            return Result.error("手机号已被注册");
+        }
     }
 
     public Result login(ExpertInfoDto expertInfoDto) {

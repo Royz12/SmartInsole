@@ -12,8 +12,14 @@ import org.springframework.stereotype.Service;
 public class SportmanInfoService {
     @Autowired
     private SportmanInfoMapper sportmanInfoMapper;
-    public void insert(SportmanInfo sportmanInfo) {
-        sportmanInfoMapper.insert(sportmanInfo);
+    public Result insert(SportmanInfo sportmanInfo) {
+        SportmanInfo s = sportmanInfoMapper.FindByPh(sportmanInfo.getPhonenumber());
+        if(s==null){
+            sportmanInfoMapper.insert(sportmanInfo);
+            return Result.success();
+        }else {
+            return Result.error("手机号已被注册");
+        }
     }
 
     public Result login(SportmanInfoDto SportmanInfoDto) {

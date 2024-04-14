@@ -22,8 +22,18 @@ public class SportmanInfoController {
 
     @PostMapping("/add")
     public Result add(@RequestBody SportmanInfo sportmanInfo){
+        String Password = sportmanInfo.getPassword();
+        String PhNum= sportmanInfo.getPhonenumber();
         try{
-            sportmanInfoService.insert(sportmanInfo);
+            if(StringUtils.isEmpty(Password) || StringUtils.isEmpty(PhNum)){
+                return Result.error("密码或手机号为空");
+            }else if(Password.length()<8){
+                return Result.error("密码长度小于8位");
+            }else if(PhNum.length()!=11){
+                return Result.error("手机号长度应为11位");
+            }else{
+                return sportmanInfoService.insert(sportmanInfo);
+            }
         }catch (Exception e){
             if(e instanceof DuplicateFormatFlagsException){
                 return Result.error("插入数据库错误");
@@ -31,11 +41,10 @@ public class SportmanInfoController {
                 return Result.error("系统错误");
             }
         }
-        return Result.success();
     }
 
     /**
-     * 运动员登录
+     * 运动员登录-校验
      * @param SportmanInfoDto
      */
     @PostMapping("/login")
@@ -44,6 +53,10 @@ public class SportmanInfoController {
         String Password=SportmanInfoDto.getPassword();
         if( StringUtils.isEmpty(PhoneNumber) || StringUtils.isEmpty(Password)){
             return Result.error("请输入手机号或密码");
+        }else if(PhoneNumber.length()!=11){
+            return Result.error("手机号应为11位");
+        }else if(Password.length()<8){
+            return Result.error("密码位数至少为8位");
         }else{
             return sportmanInfoService.login(SportmanInfoDto);
         }
@@ -67,14 +80,26 @@ public class SportmanInfoController {
         System.out.println(sportmanInfo);
         return Result.success(sportmanInfo);
     }
-    /**
-     * 用户密码修改
+
+    /***
+     * 用户密码修改-校验
      * @param sportmanInfo
+     * @return
      */
     @PostMapping("/modifypass")
     public Result modify(@RequestBody SportmanInfo sportmanInfo){
+        String Password = sportmanInfo.getPassword();
+        String PhNum= sportmanInfo.getPhonenumber();
         try{
-            sportmanInfoService.modifyPass(sportmanInfo);
+            if(StringUtils.isEmpty(Password) || StringUtils.isEmpty(PhNum)){
+                return Result.error("密码或手机号为空");
+            }else if(Password.length()<8){
+                return Result.error("密码长度小于8位");
+            }else if(PhNum.length()!=11){
+                return Result.error("手机号长度应为11位");
+            }else{
+                sportmanInfoService.modifyPass(sportmanInfo);
+            }
         }catch (Exception e){
             if(e instanceof DuplicateFormatFlagsException){
                 return Result.error("修改密码失败");
