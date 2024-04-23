@@ -11,22 +11,6 @@
                 #{right_result_1},#{right_result_2},#{right_result_3},#{right_result_4})
     </insert>
 
-    <update id="updateRecord">
-        UPDATE sport_analysis
-        SET left_average = #{left_average},
-            right_average = #{right_average},
-            left_result = #{left_result},
-            right_result = #{right_result},
-            left_result_1 = #{left_result_1},
-            left_result_2 = #{left_result_2},
-            left_result_3 = #{left_result_3},
-            left_result_4 = #{left_result_4},
-            right_result_1 = #{right_result_1},
-            right_result_2 = #{right_result_2},
-            right_result_3 = #{right_result_3},
-            right_result_4 = #{right_result_4}
-        WHERE sportman_id = #{sportman_id};
-    </update>
 
     <select id="getleftavg" resultType="java.lang.Double">
         SELECT AVG(l.total) from leftinsole l,bind_insole b
@@ -110,7 +94,7 @@
     </select>
 
     <select id="getrecord" resultType="com.graduationdesign.springbootsmartinsole.entity.SportAnalysis">
-        select * from sport_analysis where sportman_id=#{sportman_id}
+        select * from sport_analysis where sportman_id=#{sportman_id} order by analysis_id limit 1
     </select>
 
     <select id="search_record_idList" resultType="com.graduationdesign.springbootsmartinsole.entity.BindExpert">

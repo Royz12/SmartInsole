@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Advice_List {
-    String sportman_name;
-    int sportman_id;
-    int expert_id;
-    String profile_picture;
+public class AdminInfo {
+    private int admin_id;
+    private String phonenumber;
+    private String password;
+    private String admin_name;
+    private String profile_picture;
 }

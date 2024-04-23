@@ -29,7 +29,5 @@ public interface SportAnalysisMapper {
 
     SportAnalysis getrecord(SportmanInfo sportmanInfo);
 
-    void updateRecord(SportAnalysis sportAnalysis);
-
     List<BindExpert> search_record_idList(ExpertInfo expertInfo);
 }

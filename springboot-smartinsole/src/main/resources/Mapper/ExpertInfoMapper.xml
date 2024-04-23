@@ -4,7 +4,7 @@
 <mapper namespace="com.graduationdesign.springbootsmartinsole.mapper.ExpertInfoMapper">
     <insert id="insert">
         insert into expertinfo(expert_id,password,expert_name,phonenumber,height,weight,worktime,selfintro,profile_picture)
-        values(#{expert_id},#{password},#{expert_name},#{phonenumber},#{height},#{weight},#{worktime},#{selfintro},#{profile_picture})
+        values(#{expert_id},#{password},#{expert_name},#{phonenumber},#{height},#{weight},1,#{selfintro},#{profile_picture})
     </insert>
 
     <update id="update">
@@ -34,8 +34,11 @@
         <if test="password!=null">
             password=#{password}
         </if>
-        where expert_id=#{expert_id}
+        where phonenumber=#{phonenumber}
     </update>
+    <delete id="delete">
+        delete from expertinfo where expert_id=#{expert_id}
+    </delete>
     <select id="FindByPass" resultType="com.graduationdesign.springbootsmartinsole.entity.ExpertInfo">
         select * from expertinfo where phonenumber=#{phonenumber}
     </select>
@@ -43,16 +46,17 @@
         select * from expertinfo
     </select>
     <select id="search" resultType="com.graduationdesign.springbootsmartinsole.entity.ExpertInfo">
-        select * from expertinfo where
-        <if test="expert_name!=null">
-            expert_name=#{expert_name}
-        </if>
-        <if test="worktime!=null">
-            and worktime=#{worktime}
-        </if>
+        select * from expertinfo where expert_name=#{expert_name} or worktime=#{expert_name}
     </select>
-    <select id="FindByPh" resultType="com.graduationdesign.springbootsmartinsole.entity.ExpertInfo">
-        select * from expertinfo where phonenumber=#{phonenumber}
+    <select id="searchById" resultType="com.graduationdesign.springbootsmartinsole.entity.ExpertInfo">
+        select * from expertinfo where expert_id=#{expert_id}
+    </select>
+    <select id="searchByid" resultType="com.graduationdesign.springbootsmartinsole.entity.ExpertInfo">
+        select * from expertinfo where expert_id=#{expert_id}
+    </select>
+    <select id="select" resultType="com.graduationdesign.springbootsmartinsole.entity.ExpertInfo">
+        select * from expertinfo
+        order by expert_id
     </select>
 
 </mapper>

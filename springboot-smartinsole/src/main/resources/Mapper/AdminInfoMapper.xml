@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduationdesign.springbootsmartinsole.mapper.AdminInfoMapper">
+
+    <select id="FindByPhonenumber" resultType="com.graduationdesign.springbootsmartinsole.entity.AdminInfo">
+        select * from admininfo where phonenumber=#{phonenumber}
+    </select>
+    <insert id="insert">
+        insert into admininfo(phonenumber,password,admin_name,profile_picture)
+        values (#{phonenumber},#{password},#{admin_name},#{profile_picture})
+    </insert>
+    <update id="update">
+        update admininfo set
+        <if test="admin_id!=null">
+            admin_id=#{admin_id}
+        </if>
+        <if test="admin_name!=null">
+            ,admin_name=#{admin_name}
+        </if>
+        <if test="phonenumber!=null">
+            ,phonenumber=#{phonenumber}
+        </if>
+        <if test="profile_picture!=null">
+            ,profile_picture=#{profile_picture}
+        </if>
+        where admin_id=#{admin_id}
+    </update>
+    <update id="modifyPass">
+        update admininfo set
+        <if test="password!=null">
+            password=#{password}
+        </if>
+        where admin_id=#{admin_id}
+    </update>
+</mapper>
+

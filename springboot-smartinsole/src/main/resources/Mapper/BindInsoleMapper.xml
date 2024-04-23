@@ -12,4 +12,7 @@
         update bind_insole set bind=0
         where sportman_id=#{sportman_id} and left_id=#{left_id} and right_id=#{right_id}
     </update>
+    <select id="selectById" resultType="com.graduationdesign.springbootsmartinsole.entity.BindInsole">
+        select * from bind_insole where sportman_id=#{sportman_id}
+    </select>
 </mapper>

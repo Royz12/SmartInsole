@@ -1,5 +1,7 @@
 package com.graduationdesign.springbootsmartinsole.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.graduationdesign.springbootsmartinsole.entity.*;
 import com.graduationdesign.springbootsmartinsole.mapper.AdviceMapper;
 import com.graduationdesign.springbootsmartinsole.mapper.BindExpertMapper;
@@ -35,11 +37,32 @@ public class AdviceService {
         List<Advice_List> adviceLists=new ArrayList<>();
         for (int i=0;i<adviceList.size();i++){
             Advice_List advice_list=new Advice_List();
+            SportmanInfo sportmanInfo=new SportmanInfo();
+            sportmanInfo=adviceMapper.findallById(adviceList.get(i).getSportman_id());
             advice_list.setExpert_id(adviceList.get(i).getExpert_id());
             advice_list.setSportman_id(adviceList.get(i).getSportman_id());
-            advice_list.setSportman_name(adviceMapper.findByid(adviceList.get(i).getSportman_id()));
+            advice_list.setSportman_name(sportmanInfo.getSportman_name());
+            advice_list.setProfile_picture(sportmanInfo.getProfile_picture());
             adviceLists.add(advice_list);
         }
         return adviceLists;
+    }
+
+    public List<Advice> selectAll() {
+        return adviceMapper.selectall();
+    }
+
+    public void modify(Advice advice) {
+        adviceMapper.modify(advice);
+    }
+
+    public void delete(Advice advice) {
+        adviceMapper.delete(advice);
+    }
+
+    public PageInfo<Advice> selectPage( Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Advice> list = adviceMapper.select(pageNum,pageSize);
+        return PageInfo.of(list);
     }
 }

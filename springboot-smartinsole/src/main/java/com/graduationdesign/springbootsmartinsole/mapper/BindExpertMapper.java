@@ -2,6 +2,7 @@ package com.graduationdesign.springbootsmartinsole.mapper;
 
 import com.graduationdesign.springbootsmartinsole.entity.BindExpert;
 import com.graduationdesign.springbootsmartinsole.entity.ExpertInfo;
+import com.graduationdesign.springbootsmartinsole.entity.SportmanInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface BindExpertMapper {
     List<BindExpert> searchListByexpert_id(ExpertInfo expertInfo);
 
     List<ExpertInfo> search_history(BindExpert bindExpert);
+
+    int searchExpert(SportmanInfo sportmanInfo);
 }

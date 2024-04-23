@@ -2,6 +2,8 @@ package com.graduationdesign.springbootsmartinsole.mapper;
 
 import com.graduationdesign.springbootsmartinsole.entity.ExpertInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -19,5 +21,11 @@ public interface ExpertInfoMapper {
 
     List<ExpertInfo> search(ExpertInfo expertInfo);
 
-    ExpertInfo FindByPh(String phonenumber);
+    List<ExpertInfo> searchById(ExpertInfo expertInfo);
+
+    ExpertInfo searchByid(ExpertInfo expertInfo);
+
+    void delete(ExpertInfo expertInfo);
+
+    List<ExpertInfo> select(ExpertInfo expertInfo, Integer pageNum, Integer pageSize);
 }

@@ -8,6 +8,14 @@
         insert into advice(sportman_id,expert_id,advice)
         values (#{sportman_id},#{expert_id},#{advice})
     </insert>
+    <update id="modify">
+        update advice set
+        advice=#{advice}
+        where adviceid=#{adviceid}
+    </update>
+    <delete id="delete">
+        delete from advice where adviceid=#{adviceid}
+    </delete>
     <select id="show_advice" resultType="com.graduationdesign.springbootsmartinsole.entity.Advice">
         select * from advice
         where sportman_id=#{sportman_id} and expert_id=#{expert_id}
@@ -20,6 +28,15 @@
         select sportman_name from sportmaninfo
         where sportman_id=#{sportman_id}
     </select>
-
+    <select id="findallById" resultType="com.graduationdesign.springbootsmartinsole.entity.SportmanInfo">
+        select * from sportmaninfo
+        where sportman_id=#{sportman_id}
+    </select>
+    <select id="selectall" resultType="com.graduationdesign.springbootsmartinsole.entity.Advice">
+        select * from advice
+    </select>
+    <select id="select" resultType="com.graduationdesign.springbootsmartinsole.entity.Advice">
+        select * from advice order by adviceid
+    </select>
 
 </mapper>

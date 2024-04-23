@@ -5,6 +5,8 @@ import com.graduationdesign.springbootsmartinsole.entity.ExpertInfo;
 import com.graduationdesign.springbootsmartinsole.entity.SportmanInfo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface SportmanInfoMapper {
 
@@ -18,5 +20,9 @@ public interface SportmanInfoMapper {
 
     void modifyPass(SportmanInfo sportmanInfo);
 
-    SportmanInfo FindByPh(String phonenumber);
+    void delete(SportmanInfo sportmanInfo);
+
+    List<SportmanInfo> list();
+
+    List<SportmanInfo> selectall(SportmanInfo sportmanInfo, Integer pageNum, Integer pageSize);
 }

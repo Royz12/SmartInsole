@@ -8,6 +8,9 @@
         insert into sportmaninfo (sportman_id,password,sportman_name,phonenumber,height,weight,selfintro,profile_picture,expert_id)
         values (#{sportman_id},#{password},#{sportman_name},#{phonenumber},#{height},#{weight},#{selfintro},#{profile_picture},0)
     </insert>
+    <delete id="delete">
+        delete from sportmaninfo where sportman_id=#{sportman_id}
+    </delete>
 
     <select id="FindByPass" resultType="com.graduationdesign.springbootsmartinsole.entity.SportmanInfo">
         select * from sportmaninfo where phonenumber=#{phonenumber}
@@ -19,6 +22,13 @@
     <select id="FindByPh" resultType="com.graduationdesign.springbootsmartinsole.entity.SportmanInfo">
         select * from sportmaninfo where phonenumber=#{phonenumber}
     </select>
+    <select id="list" resultType="com.graduationdesign.springbootsmartinsole.entity.SportmanInfo">
+        select * from sportmaninfo
+    </select>
+    <select id="selectall" resultType="com.graduationdesign.springbootsmartinsole.entity.SportmanInfo">
+        select * from sportmaninfo
+        order by sportman_id
+    </select>
 
 
     <update id="update">
@@ -27,7 +37,7 @@
             sportman_id=#{sportman_id}
         </if>
         <if test="sportman_name!=null">
-            ,expert_name=#{sportman}
+            ,sportman_name=#{sportman_name}
         </if>
         <if test="phonenumber!=null">
             ,phonenumber=#{phonenumber}

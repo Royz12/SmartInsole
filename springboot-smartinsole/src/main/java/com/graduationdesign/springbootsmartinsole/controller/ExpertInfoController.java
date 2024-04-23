@@ -1,8 +1,10 @@
 package com.graduationdesign.springbootsmartinsole.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.graduationdesign.springbootsmartinsole.common.Result;
 import com.graduationdesign.springbootsmartinsole.controller.dto.ExpertInfoDto;
 import com.graduationdesign.springbootsmartinsole.entity.ExpertInfo;
+import com.graduationdesign.springbootsmartinsole.entity.SportmanInfo;
 import com.graduationdesign.springbootsmartinsole.service.ExpertInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -27,10 +29,10 @@ public class ExpertInfoController {
         try{
             if(StringUtils.isEmpty(Password) || StringUtils.isEmpty(PhNum)){
                 return Result.error("密码或手机号为空");
-            }else if(Password.length()<8){
-                return Result.error("密码长度小于8位");
-            }else if(PhNum.length()!=11){
-                return Result.error("手机号长度应为11位");
+//            }else if(Password.length()<8){
+//                return Result.error("密码长度小于8位");
+//            }else if(PhNum.length()!=11){
+//                return Result.error("手机号长度应为11位");
             }else{
                 return expertInfoService.insertExpert(expertInfo);
             }
@@ -52,10 +54,10 @@ public class ExpertInfoController {
         String Password=expertInfoDto.getPassword();
         if( StringUtils.isEmpty(PhoneNumber) || StringUtils.isEmpty(Password)){
             return Result.error("请输入手机号或密码");
-        }else if(PhoneNumber.length()!=11){
-            return Result.error("手机号应为11位");
-        }else if(Password.length()<8){
-            return Result.error("密码位数至少为8位");
+//        }else if(PhoneNumber.length()!=11){
+//            return Result.error("手机号应为11位");
+//        }else if(Password.length()<8){
+//            return Result.error("密码位数至少为8位");
         }else{
             return expertInfoService.login(expertInfoDto);
         }
@@ -93,7 +95,7 @@ public class ExpertInfoController {
             }else if(PhNum.length()!=11){
                 return Result.error("手机号长度应为11位");
             }else{
-                expertInfoService.modifyPass(expertInfo);
+                return expertInfoService.modifyPass(expertInfo);
             }
         }catch (Exception e){
             if(e instanceof DuplicateFormatFlagsException){
@@ -102,7 +104,6 @@ public class ExpertInfoController {
                 return Result.error("系统错误");
             }
         }
-        return Result.success("修改成功");
     }
     /**
      * 展现所有专家信息
@@ -119,5 +120,37 @@ public class ExpertInfoController {
         return Result.success(expertList);
     }
 
+    @PostMapping("/searchById")
+    public Result searchById(@RequestBody ExpertInfo expertInfo){
+        List<ExpertInfo> expertInfoList=expertInfoService.searchById(expertInfo);
+        return Result.success(expertInfoList);
+    }
 
+    /**
+     * 管理端删除专家信息
+     * @param expertInfo
+     * @return
+     */
+    @DeleteMapping("/deleteexpert")
+    public Result delete(@RequestBody ExpertInfo expertInfo){
+        try {
+            System.out.println(expertInfo.getExpert_id());
+            expertInfoService.delete(expertInfo);
+            return Result.success("删除成功");
+        }catch (Exception e){
+            return Result.error("删除失败");
+        }
+    }
+
+    /**
+     * 分页查询
+     */
+    @GetMapping("/selectPage")
+    public Result selectPage(@RequestParam ExpertInfo expertInfo,
+                             @RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageInfo<ExpertInfo> page = expertInfoService.selectPage(expertInfo, pageNum, pageSize);
+        System.out.println("3");
+        return Result.success(page);
+    }
 }

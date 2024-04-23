@@ -14,6 +14,7 @@ public class Data {
     String name;
     int sportman_id;
     double[] valueList =new double[2];
+    String[] result=new String[5544];
     List<Sole_data> valueList1=new ArrayList<>();
     double height;
     double weight;

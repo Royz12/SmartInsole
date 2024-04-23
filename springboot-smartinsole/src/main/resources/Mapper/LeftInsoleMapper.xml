@@ -4,4 +4,9 @@
 <mapper namespace="com.graduationdesign.springbootsmartinsole.mapper.LeftInsoleMapper">
 
 
+    <select id="selectById" resultType="com.graduationdesign.springbootsmartinsole.entity.LeftInsole">
+        select * from leftinsole
+        where leftid=#{left_id}
+        order by id desc limit 1
+    </select>
 </mapper>
