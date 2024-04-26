@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduationdesign.springbootsmartinsole.mapper.BindInsoleMapper">
+
+
+    <insert id="bind">
+        insert into bind_insole(sportman_id,left_id,right_id,bind)
+        values (#{sportman_id},#{left_id},#{right_id},1)
+    </insert>
+    <insert id="bindRight">
+        insert into bind_insole(sportman_id,left_id,right_id,bind)
+        values (#{sportman_id},"",#{right_id},1)
+    </insert>
+    <insert id="bindLeft">
+        insert into bind_insole(sportman_id,left_id,right_id,bind)
+        values (#{sportman_id},#{left_id},"",1)
+    </insert>
+
+    <update id="cancel">
+        update bind_insole set bind=0
+        <where>
+            <if test="sportman_id!=null">
+                sportman_id=#{sportman_id}
+            </if>
+            <if test="left_id!=null">
+                and left_id=#{left_id}
+            </if>
+            <if test="right_id!=null">
+                right_id=#{right_id}
+            </if>
+        </where>
+    </update>
+
+    <update id="update">
+        update bind_insole
+        <set>
+            <if test="sportman_id!=0">
+                sportman_id=#{sportman_id}
+            </if>
+            <if test="left_id!=null">
+                ,left_id=#{left_id}
+            </if>
+            <if test="right_id!=null">
+                ,right_id=#{right_id}
+            </if>
+        </set>
+        where sportman_id=#{sportman_id} and bind=1
+    </update>
+
+    <update id="cancel_left">
+        update bind_insole set bind=0 and left_id=""
+        where sportman_id=#{sportman_id}
+    </update>
+    <delete id="cancel_right">
+        update bind_insole set bind=0 and right_id=""
+        where sportman_id=#{sportman_id}
+    </delete>
+
+    <select id="selectById" resultType="com.graduationdesign.springbootsmartinsole.entity.BindInsole">
+        select * from bind_insole where sportman_id=#{sportman_id} and bind=1
+    </select>
+    <select id="selectByRightInsoleId" resultType="com.graduationdesign.springbootsmartinsole.entity.BindInsole">
+        select * from bind_insole where right_id=#{right_id} and bind=1
+    </select>
+    <select id="selectByLeftInsoleId"
+            resultType="com.graduationdesign.springbootsmartinsole.entity.BindInsole">
+        select * from bind_insole where left_id=#{left_id} and bind=1
+    </select>
+    <select id="nullRight" resultType="java.lang.String">
+        select rightid from rightinsole where rightid=#{right_id} limit 1
+    </select>
+    <select id="exist" resultType="com.graduationdesign.springbootsmartinsole.entity.BindInsole">
+        select * from bind_insole where sportman_id=#{sportman_id} and bind=1
+    </select>
+    <select id="nullLeft" resultType="java.lang.String">
+        select leftid from leftinsole where leftid=#{left_id} limit 1
+    </select>
+
+
+</mapper>

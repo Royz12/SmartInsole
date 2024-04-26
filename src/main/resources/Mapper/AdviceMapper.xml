@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduationdesign.springbootsmartinsole.mapper.AdviceMapper">
+
+
+    <insert id="insert">
+        insert into advice(sportman_id,expert_id,advice)
+        values (#{sportman_id},#{expert_id},#{advice})
+    </insert>
+    <update id="modify">
+        update advice
+        <set>
+            <if test="adviceid!=null">
+                adviceid=#{adviceid}
+            </if>
+            <if test="advice!=null">
+                ,advice=#{advice}
+            </if>
+            <if test="expert_id!=null">
+                ,expert_id=#{expert_id}
+            </if>
+            <if test="sportman_id!=null">
+                ,sportman_id=#{sportman_id}
+            </if>
+        </set>
+        where adviceid=#{adviceid}
+    </update>
+    <delete id="delete">
+        delete from advice where adviceid=#{adviceid}
+    </delete>
+    <select id="show_advice" resultType="com.graduationdesign.springbootsmartinsole.entity.Advice">
+        select * from advice
+        where sportman_id=#{sportman_id} and expert_id=#{expert_id}
+    </select>
+    <select id="show_all" resultType="com.graduationdesign.springbootsmartinsole.entity.Advice">
+        select * from advice
+        where expert_id=#{expert_id}
+    </select>
+    <select id="findByid" resultType="java.lang.String">
+        select sportman_name from sportmaninfo
+        where sportman_id=#{sportman_id}
+    </select>
+    <select id="findallById" resultType="com.graduationdesign.springbootsmartinsole.entity.SportmanInfo">
+        select * from sportmaninfo
+        where sportman_id=#{sportman_id}
+    </select>
+    <select id="selectall" resultType="com.graduationdesign.springbootsmartinsole.entity.Advice">
+        select * from advice
+    </select>
+    <select id="select" resultType="com.graduationdesign.springbootsmartinsole.entity.Advice">
+        select * from advice
+        <where>
+            <if test="advice.advice != null and advice.advice != ''">
+                AND advice LIKE CONCAT('%', #{advice.advice}, '%')
+            </if>
+        </where>
+        order by adviceid
+    </select>
+
+</mapper>

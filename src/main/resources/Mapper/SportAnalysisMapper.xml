@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduationdesign.springbootsmartinsole.mapper.SportAnalysisMapper">
+    <insert id="addRecord">
+        insert into sport_analysis(sportman_id,left_average,right_average,left_result,right_result,
+                                    left_result_1,left_result_2,left_result_3,left_result_4,
+                                   right_result_1,right_result_2,right_result_3,right_result_4)
+        values (#{sportman_id},#{left_average},#{right_average},#{left_result},#{right_result},
+               #{left_result_1},#{left_result_2},#{left_result_3},#{left_result_4},
+                #{right_result_1},#{right_result_2},#{right_result_3},#{right_result_4})
+    </insert>
+
+
+    <select id="getleftavg" resultType="java.lang.Double">
+        SELECT AVG(l.total) from leftinsole l,bind_insole b
+        WHERE l.leftid=b.left_id AND b.sportman_id=#{sportman_id} AND b.bind=1
+    </select>
+
+    <select id="getrightavg" resultType="java.lang.Double">
+        SELECT AVG(r.total) from rightinsole r,bind_insole b
+        WHERE r.rightid=b.right_id AND b.sportman_id=#{sportman_id} AND b.bind=1
+    </select>
+
+    <select id="getrightdir" resultType="java.lang.Integer">
+        SELECT
+            (CASE
+                 WHEN max_sum = sum_right_1 THEN '1'
+                 WHEN max_sum = sum_right_2 THEN '2'
+                 WHEN max_sum = sum_right_3 THEN '3'
+                 WHEN max_sum = sum_right_4 THEN '4'
+                END) AS remark
+        FROM
+            (SELECT
+                 rightid,
+                 SUM(average_1) AS sum_right_1,
+                 SUM(average_2) AS sum_right_2,
+                 SUM(average_3) AS sum_right_3,
+                 SUM(average_4) AS sum_right_4,
+                 greatest(SUM(average_1) ,SUM(average_2) ,SUM(average_3) ,SUM(average_4))  AS max_sum
+             FROM
+                 rightinsole
+             GROUP BY
+                 rightid) rightinsole
+                INNER JOIN
+            bind_insole b ON rightinsole.rightid = b.right_id
+        WHERE
+            b.sportman_id = #{sportman_id}
+          AND b.bind = 1;
+    </select>
+
+    <select id="getleftdir" resultType="java.lang.Integer">
+        SELECT
+            (CASE
+                 WHEN max_sum = sum_left_1 THEN '1'
+                 WHEN max_sum = sum_left_2 THEN '2'
+                 WHEN max_sum = sum_left_3 THEN '3'
+                 WHEN max_sum = sum_left_4 THEN '4'
+                END) AS remark
+        FROM
+            (SELECT
+                 leftid,
+                 SUM(average_1) AS sum_left_1,
+                 SUM(average_2) AS sum_left_2,
+                 SUM(average_3) AS sum_left_3,
+                 SUM(average_4) AS sum_left_4,
+                 greatest(SUM(average_1) ,SUM(average_2) ,SUM(average_3) ,SUM(average_4))  AS max_sum
+             FROM
+                 leftinsole
+             GROUP BY
+                 leftid) leftinsole
+                INNER JOIN
+            bind_insole b ON leftinsole.leftid = b.left_id
+        WHERE
+            b.sportman_id = #{sportman_id}
+          AND b.bind = 1;
+
+    </select>
+
+    <select id="getleft_little_avg" resultType="com.graduationdesign.springbootsmartinsole.entity.SportAnalysis">
+        SELECT AVG(average_1) AS left_result_1,AVG(average_2) AS left_result_2,AVG(average_3) AS left_result_3,AVG(average_4) AS left_result_4
+        FROM leftinsole
+                 INNER JOIN bind_insole on leftinsole.leftid=bind_insole.left_id
+        where bind_insole.sportman_id=#{sportman_id}
+        GROUP BY leftid
+    </select>
+
+    <select id="getright_little_avg" resultType="com.graduationdesign.springbootsmartinsole.entity.SportAnalysis">
+        SELECT AVG(average_1) AS right_result_1,AVG(average_2) AS right_result_2,AVG(average_3) AS right_result_3,AVG(average_4) AS right_result_4
+        FROM rightinsole
+        INNER JOIN bind_insole on rightinsole.rightid=bind_insole.right_id
+        where bind_insole.sportman_id=#{sportman_id}
+        GROUP BY rightid
+    </select>
+
+    <select id="getrecord" resultType="com.graduationdesign.springbootsmartinsole.entity.SportAnalysis">
+        select * from sport_analysis where sportman_id=#{sportman_id} order by analysis_id limit 1
+    </select>
+
+    <select id="search_record_idList" resultType="com.graduationdesign.springbootsmartinsole.entity.BindExpert">
+        select * from bind_expert where expert_id = #{expert_id} and bind!=0;
+    </select>
+
+</mapper>

@@ -1,0 +1,177 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > AdviceService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.graduationdesign.springbootsmartinsole.service</a>
+</div>
+
+<h1>Coverage Summary for Class: AdviceService (com.graduationdesign.springbootsmartinsole.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AdviceService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11.1%
+  </span>
+  <span class="absValue">
+    (1/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.4%
+  </span>
+  <span class="absValue">
+    (1/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.graduationdesign.springbootsmartinsole.service;
+&nbsp;
+&nbsp;import com.github.pagehelper.PageHelper;
+&nbsp;import com.github.pagehelper.PageInfo;
+&nbsp;import com.graduationdesign.springbootsmartinsole.entity.*;
+&nbsp;import com.graduationdesign.springbootsmartinsole.mapper.AdviceMapper;
+&nbsp;import com.graduationdesign.springbootsmartinsole.mapper.BindExpertMapper;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class AdviceService {</b>
+&nbsp;    @Autowired
+&nbsp;    private AdviceMapper adviceMapper;
+&nbsp;    @Autowired
+&nbsp;    private BindExpertMapper bindExpertMapper;
+&nbsp;    public void insertAdvice(Advice advice) {
+<b class="nc">&nbsp;        adviceMapper.insert(advice);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Advice_Info&gt; show_advice(Advice advice) {
+<b class="nc">&nbsp;        List&lt;Advice_Info&gt; adviceInfolist=new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        List&lt;Advice&gt; adviceList= adviceMapper.show_advice(advice);</b>
+<b class="nc">&nbsp;        for (int i=0;i&lt;adviceList.size();i++){</b>
+<b class="nc">&nbsp;            Advice_Info adviceInfo=new Advice_Info();</b>
+<b class="nc">&nbsp;            adviceInfo.setAdvice(adviceList.get(i).getAdvice());</b>
+<b class="nc">&nbsp;            adviceInfolist.add(adviceInfo);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return adviceInfolist;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Advice_List&gt; show_list(ExpertInfo expertInfo) {
+<b class="nc">&nbsp;        List&lt;BindExpert&gt; adviceList=bindExpertMapper.searchListByexpert_id(expertInfo);</b>
+<b class="nc">&nbsp;        List&lt;Advice_List&gt; adviceLists=new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (int i=0;i&lt;adviceList.size();i++){</b>
+<b class="nc">&nbsp;            Advice_List advice_list=new Advice_List();</b>
+<b class="nc">&nbsp;            SportmanInfo sportmanInfo=new SportmanInfo();</b>
+<b class="nc">&nbsp;            sportmanInfo=adviceMapper.findallById(adviceList.get(i).getSportman_id());</b>
+<b class="nc">&nbsp;            advice_list.setExpert_id(adviceList.get(i).getExpert_id());</b>
+<b class="nc">&nbsp;            advice_list.setSportman_id(adviceList.get(i).getSportman_id());</b>
+<b class="nc">&nbsp;            advice_list.setSportman_name(sportmanInfo.getSportman_name());</b>
+<b class="nc">&nbsp;            advice_list.setProfile_picture(sportmanInfo.getProfile_picture());</b>
+<b class="nc">&nbsp;            adviceLists.add(advice_list);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return adviceLists;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Advice&gt; selectAll() {
+<b class="nc">&nbsp;        return adviceMapper.selectall();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void modify(Advice advice) {
+<b class="nc">&nbsp;        adviceMapper.modify(advice);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void delete(Advice advice) {
+<b class="nc">&nbsp;        adviceMapper.delete(advice);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PageInfo&lt;Advice&gt; selectPage(Advice advice,Integer pageNum, Integer pageSize) {
+<b class="nc">&nbsp;        PageHelper.startPage(pageNum, pageSize);</b>
+<b class="nc">&nbsp;        List&lt;Advice&gt; list = adviceMapper.select(advice,pageNum,pageSize);</b>
+<b class="nc">&nbsp;        return PageInfo.of(list);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;BindExpert&gt; get_list(ExpertInfo expertInfo) {
+<b class="nc">&nbsp;        List&lt;BindExpert&gt; bindExpert=bindExpertMapper.searchListByexpert_id(expertInfo);</b>
+<b class="nc">&nbsp;        return bindExpert;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-26 09:56</div>
+</div>
+</body>
+</html>

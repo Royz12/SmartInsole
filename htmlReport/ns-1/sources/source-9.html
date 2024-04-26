@@ -1,0 +1,918 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > SportAnalysisService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.graduationdesign.springbootsmartinsole.service</a>
+</div>
+
+<h1>Coverage Summary for Class: SportAnalysisService (com.graduationdesign.springbootsmartinsole.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SportAnalysisService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    14.3%
+  </span>
+  <span class="absValue">
+    (1/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0.2%
+  </span>
+  <span class="absValue">
+    (1/427)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.graduationdesign.springbootsmartinsole.service;
+&nbsp;
+&nbsp;import com.graduationdesign.springbootsmartinsole.controller.dto.SportmanInfoDto;
+&nbsp;import com.graduationdesign.springbootsmartinsole.entity.*;
+&nbsp;import com.graduationdesign.springbootsmartinsole.mapper.*;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class SportAnalysisService {</b>
+&nbsp;    @Autowired
+&nbsp;    private SportAnalysisMapper sportAnalysisMapper;
+&nbsp;    @Autowired
+&nbsp;    private SportmanInfoMapper sportmanInfoMapper;
+&nbsp;    @Autowired
+&nbsp;    private BindExpertMapper bindExpertMapper;
+&nbsp;    @Autowired
+&nbsp;    private BindInsoleMapper bindInsoleMapper;
+&nbsp;    @Autowired
+&nbsp;    private LeftInsoleMapper leftInsoleMapper;
+&nbsp;    @Autowired
+&nbsp;    private RightInsoleMapper rightInsoleMapper;
+&nbsp;
+&nbsp;    public void addRecord(ExpertInfo expertInfo) {
+&nbsp;        List&lt;BindExpert&gt; bindExpertList;
+<b class="nc">&nbsp;        bindExpertList= bindExpertMapper.searchListByexpert_id(expertInfo);</b>
+<b class="nc">&nbsp;        for (int i=0;i&lt;bindExpertList.size();i++){</b>
+<b class="nc">&nbsp;            BindExpert bindExpert=bindExpertList.get(i);</b>
+&nbsp;
+<b class="nc">&nbsp;            SportmanInfo dto=new SportmanInfo();</b>
+<b class="nc">&nbsp;            dto.setSportman_id(bindExpert.getSportman_id());</b>
+<b class="nc">&nbsp;            SportmanInfo sportmanInfo=sportmanInfoMapper.searchById(dto);</b>
+&nbsp;
+<b class="nc">&nbsp;            SportAnalysis sportAnalysis =new SportAnalysis();</b>
+&nbsp;            SportAnalysis sportAnalysis_left;
+&nbsp;            SportAnalysis sportAnalysis_right;
+&nbsp;            SportAnalysis sportAnalysis_null;
+&nbsp;
+<b class="nc">&nbsp;            sportAnalysis.setSportman_id(sportmanInfo.getSportman_id());</b>
+<b class="nc">&nbsp;            sportAnalysis.setSportman_name(sportmanInfo.getSportman_name());</b>
+<b class="nc">&nbsp;            sportAnalysis.setLeft_average(sportAnalysisMapper.getleftavg(sportmanInfo));</b>
+<b class="nc">&nbsp;            sportAnalysis.setRight_average(sportAnalysisMapper.getrightavg(sportmanInfo));</b>
+<b class="nc">&nbsp;            sportAnalysis.setLeft_result(sportAnalysisMapper.getleftdir(sportmanInfo));</b>
+<b class="nc">&nbsp;            sportAnalysis.setRight_result(sportAnalysisMapper.getrightdir(sportmanInfo));</b>
+&nbsp;
+&nbsp;            //获取左右脚四个鞋垫区域压力(总共八个)
+<b class="nc">&nbsp;            sportAnalysis_left=sportAnalysisMapper.getleft_little_avg(sportmanInfo);</b>
+<b class="nc">&nbsp;            sportAnalysis_right=sportAnalysisMapper.getright_little_avg(sportmanInfo);</b>
+&nbsp;
+<b class="nc">&nbsp;            sportAnalysis.setLeft_result_1(sportAnalysis_left.getLeft_result_1());</b>
+<b class="nc">&nbsp;            sportAnalysis.setLeft_result_2(sportAnalysis_left.getLeft_result_2());</b>
+<b class="nc">&nbsp;            sportAnalysis.setLeft_result_3(sportAnalysis_left.getLeft_result_3());</b>
+<b class="nc">&nbsp;            sportAnalysis.setLeft_result_4(sportAnalysis_left.getLeft_result_4());</b>
+&nbsp;
+<b class="nc">&nbsp;            sportAnalysis.setRight_result_1(sportAnalysis_right.getRight_result_1());</b>
+<b class="nc">&nbsp;            sportAnalysis.setRight_result_2(sportAnalysis_right.getRight_result_2());</b>
+<b class="nc">&nbsp;            sportAnalysis.setRight_result_3(sportAnalysis_right.getRight_result_3());</b>
+<b class="nc">&nbsp;            sportAnalysis.setRight_result_4(sportAnalysis_right.getRight_result_4());</b>
+&nbsp;
+<b class="nc">&nbsp;            sportAnalysis_null=sportAnalysisMapper.getrecord(sportmanInfo);</b>
+&nbsp;
+<b class="nc">&nbsp;            sportAnalysisMapper.addRecord(sportAnalysis);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Data&gt; echarts_data(ExpertInfo expertInfo) {
+<b class="nc">&nbsp;        List&lt;Data&gt; dataList=new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        List&lt;BindExpert&gt; record_bindexpert_idlist=sportAnalysisMapper.search_record_idList(expertInfo);</b>
+<b class="nc">&nbsp;        for(int i=0;i&lt;record_bindexpert_idlist.size();i++){</b>
+&nbsp;            double right_data;
+&nbsp;            double left_data;
+&nbsp;
+<b class="nc">&nbsp;            Sole_data sole_data=new Sole_data();</b>
+<b class="nc">&nbsp;            Sole_data sole_data1=new Sole_data();</b>
+<b class="nc">&nbsp;            double[] value=new double[4];</b>
+<b class="nc">&nbsp;            double[] value1=new double[4];</b>
+<b class="nc">&nbsp;            List&lt;Sole_data&gt; valueList1=new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            Sole_data1 sole_data2=new Sole_data1();</b>
+<b class="nc">&nbsp;            Sole_data1 sole_data3=new Sole_data1();</b>
+<b class="nc">&nbsp;            List&lt;Sole_data1&gt; valueList=new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;            Data result=new Data();</b>
+&nbsp;            BindExpert bindExpert;
+<b class="nc">&nbsp;            SportmanInfo sportmanInfo=new SportmanInfo();</b>
+&nbsp;            SportAnalysis sportAnalysis;
+&nbsp;
+<b class="nc">&nbsp;            bindExpert=record_bindexpert_idlist.get(i);</b>
+<b class="nc">&nbsp;            sportmanInfo.setSportman_id(bindExpert.getSportman_id());</b>
+<b class="nc">&nbsp;            SportmanInfo sportmanInfo1=sportmanInfoMapper.searchById(sportmanInfo);</b>
+&nbsp;
+<b class="nc">&nbsp;            sportAnalysis=sportAnalysisMapper.getrecord(sportmanInfo);</b>
+&nbsp;
+<b class="nc">&nbsp;            left_data=sportAnalysis.getLeft_average();</b>
+<b class="nc">&nbsp;            right_data=sportAnalysis.getRight_average();</b>
+&nbsp;
+<b class="nc">&nbsp;            sole_data2.setName(&quot;左脚&quot;);</b>
+<b class="nc">&nbsp;            sole_data2.setValue(left_data);</b>
+&nbsp;
+<b class="nc">&nbsp;            sole_data3.setName(&quot;右脚&quot;);</b>
+<b class="nc">&nbsp;            sole_data3.setValue(right_data);</b>
+&nbsp;
+<b class="nc">&nbsp;            sole_data.setName(&quot;左脚&quot;);</b>
+<b class="nc">&nbsp;            value[0]=sportAnalysis.getLeft_result_1();</b>
+<b class="nc">&nbsp;            value[1]=sportAnalysis.getLeft_result_2();</b>
+<b class="nc">&nbsp;            value[2]=sportAnalysis.getLeft_result_3();</b>
+<b class="nc">&nbsp;            value[3]=sportAnalysis.getLeft_result_4();</b>
+<b class="nc">&nbsp;            sole_data.setValue(value);</b>
+&nbsp;
+<b class="nc">&nbsp;            sole_data1.setName(&quot;右脚&quot;);</b>
+<b class="nc">&nbsp;            value1[0]=sportAnalysis.getRight_result_1();</b>
+<b class="nc">&nbsp;            value1[1]=sportAnalysis.getRight_result_2();</b>
+<b class="nc">&nbsp;            value1[2]=sportAnalysis.getRight_result_3();</b>
+<b class="nc">&nbsp;            value1[3]=sportAnalysis.getRight_result_4();</b>
+<b class="nc">&nbsp;            sole_data1.setValue(value1);</b>
+&nbsp;
+<b class="nc">&nbsp;            valueList1.add(sole_data);</b>
+<b class="nc">&nbsp;            valueList1.add(sole_data1);</b>
+&nbsp;
+<b class="nc">&nbsp;            valueList.add(sole_data2);</b>
+<b class="nc">&nbsp;            valueList.add(sole_data3);</b>
+&nbsp;
+<b class="nc">&nbsp;            result.setId(bindExpert.getRecord_id());</b>
+<b class="nc">&nbsp;            result.setName(sportmanInfo1.getSportman_name());</b>
+<b class="nc">&nbsp;            result.setSportman_id(bindExpert.getSportman_id());</b>
+<b class="nc">&nbsp;            result.setValueList(valueList);</b>
+<b class="nc">&nbsp;            result.setValueList1(valueList1);</b>
+<b class="nc">&nbsp;            result.setHeight(sportmanInfo1.getHeight());</b>
+<b class="nc">&nbsp;            result.setWeight(sportmanInfo1.getWeight());</b>
+&nbsp;
+&nbsp;            //热力图数据
+<b class="nc">&nbsp;            BindInsole bindInsole=bindInsoleMapper.selectById(sportmanInfo);</b>
+<b class="nc">&nbsp;            int a=0;</b>
+&nbsp;
+<b class="nc">&nbsp;            String[] result1=new String[5544];</b>
+<b class="nc">&nbsp;            int[][] data=new int[72][77];</b>
+<b class="nc">&nbsp;            for (int x=0;x&lt;72;x++){</b>
+<b class="nc">&nbsp;                for (int y=0;y&lt;77;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=0;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if (!Objects.equals(bindInsole.getLeft_id(), &quot;&quot;)){</b>
+<b class="nc">&nbsp;                LeftInsole leftInsole=leftInsoleMapper.selectById(bindInsole);</b>
+&nbsp;                //左11
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL13());</b>
+<b class="nc">&nbsp;                for (int x=8;x&lt;=14;x++){</b>
+<b class="nc">&nbsp;                    for (int y=2;y&lt;=12;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左12
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL12());</b>
+<b class="nc">&nbsp;                for (int x=16;x&lt;=22;x++){</b>
+<b class="nc">&nbsp;                    for (int y=2;y&lt;=12;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左21
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL22());</b>
+<b class="nc">&nbsp;                for (int x=8;x&lt;=14;x++){</b>
+<b class="nc">&nbsp;                    for (int y=14;y&lt;=24;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左22
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL21());</b>
+<b class="nc">&nbsp;                for (int x=16;x&lt;=22;x++){</b>
+<b class="nc">&nbsp;                    for (int y=14;y&lt;=24;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左31
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL34());</b>
+<b class="nc">&nbsp;                for (int x=5;x&lt;=10;x++){</b>
+<b class="nc">&nbsp;                    for (int y=26;y&lt;=36;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左32
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL33());</b>
+<b class="nc">&nbsp;                for (int x=12;x&lt;=17;x++){</b>
+<b class="nc">&nbsp;                    for (int y=26;y&lt;=36;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左33
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL32());</b>
+<b class="nc">&nbsp;                for (int x=19;x&lt;=24;x++){</b>
+<b class="nc">&nbsp;                    for (int y=26;y&lt;=36;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左41
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL44());</b>
+<b class="nc">&nbsp;                for (int x=2;x&lt;=17;x++){</b>
+<b class="nc">&nbsp;                    for (int y=38;y&lt;=48;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左51
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL54());</b>
+<b class="nc">&nbsp;                for (int x=5;x&lt;=10;x++){</b>
+<b class="nc">&nbsp;                    for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左52
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL53());</b>
+<b class="nc">&nbsp;                for (int x=12;x&lt;=17;x++){</b>
+<b class="nc">&nbsp;                    for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左53
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL52());</b>
+<b class="nc">&nbsp;                for (int x=19;x&lt;=24;x++){</b>
+<b class="nc">&nbsp;                    for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左54
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL52());</b>
+<b class="nc">&nbsp;                for (int x=26;x&lt;=31;x++){</b>
+<b class="nc">&nbsp;                    for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左61
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL64());</b>
+<b class="nc">&nbsp;                for (int x=8;x&lt;=13;x++){</b>
+<b class="nc">&nbsp;                    for (int y=62;y&lt;=72;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左62
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL63());</b>
+<b class="nc">&nbsp;                for (int x=15;x&lt;=20;x++){</b>
+<b class="nc">&nbsp;                    for (int y=62;y&lt;=75;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左63
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL62());</b>
+<b class="nc">&nbsp;                for (int x=22;x&lt;=27;x++){</b>
+<b class="nc">&nbsp;                    for (int y=62;y&lt;=75;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //左64
+<b class="nc">&nbsp;                a= Integer.parseInt(leftInsole.getL61());</b>
+<b class="nc">&nbsp;                for (int x=29;x&lt;=34;x++){</b>
+<b class="nc">&nbsp;                    for (int y=62;y&lt;=72;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            RightInsole rightInsole=rightInsoleMapper.selectById(bindInsole);</b>
+&nbsp;
+<b class="nc">&nbsp;            if (!Objects.equals(bindInsole.getRight_id(), &quot;&quot;)){</b>
+&nbsp;                //右61
+<b class="nc">&nbsp;                a=Integer.parseInt(rightInsole.getR61());</b>
+<b class="nc">&nbsp;                for (int x=40;x&lt;=45;x++){</b>
+<b class="nc">&nbsp;                    for (int y=62;y&lt;=72;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //右62
+<b class="nc">&nbsp;                a=Integer.parseInt(rightInsole.getR62());</b>
+<b class="nc">&nbsp;                for (int x=47;x&lt;=52;x++){</b>
+<b class="nc">&nbsp;                    for (int y=62;y&lt;=75;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //右63
+<b class="nc">&nbsp;                a=Integer.parseInt(rightInsole.getR63());</b>
+<b class="nc">&nbsp;                for (int x=54;x&lt;=57;x++){</b>
+<b class="nc">&nbsp;                    for (int y=62;y&lt;=75;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //右64
+<b class="nc">&nbsp;                a=Integer.parseInt(rightInsole.getR64());</b>
+<b class="nc">&nbsp;                for (int x=59;x&lt;=64;x++){</b>
+<b class="nc">&nbsp;                    for (int y=62;y&lt;=72;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //右54
+<b class="nc">&nbsp;                a=Integer.parseInt(rightInsole.getR54());</b>
+<b class="nc">&nbsp;                for (int x=62;x&lt;=67;x++){</b>
+<b class="nc">&nbsp;                    for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //右53
+<b class="nc">&nbsp;                a=Integer.parseInt(rightInsole.getR53());</b>
+<b class="nc">&nbsp;                for (int x=55;x&lt;=60;x++){</b>
+<b class="nc">&nbsp;                    for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //右52
+<b class="nc">&nbsp;                a=Integer.parseInt(rightInsole.getR52());</b>
+<b class="nc">&nbsp;                for (int x=48;x&lt;=53;x++){</b>
+<b class="nc">&nbsp;                    for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //右51
+<b class="nc">&nbsp;                a=Integer.parseInt(rightInsole.getR51());</b>
+<b class="nc">&nbsp;                for (int x=41;x&lt;=46;x++){</b>
+<b class="nc">&nbsp;                    for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //右41
+<b class="nc">&nbsp;                a= Integer.parseInt(rightInsole.getR44());</b>
+<b class="nc">&nbsp;                for (int x=55;x&lt;=70;x++){</b>
+<b class="nc">&nbsp;                    for (int y=38;y&lt;=48;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //右34
+<b class="nc">&nbsp;                a= Integer.parseInt(rightInsole.getR34());</b>
+<b class="nc">&nbsp;                for (int x=62;x&lt;=67;x++){</b>
+<b class="nc">&nbsp;                    for (int y=26;y&lt;=36;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;
+&nbsp;                //右33
+<b class="nc">&nbsp;                a=Integer.parseInt(rightInsole.getR33());</b>
+<b class="nc">&nbsp;                for (int x=55;x&lt;=60;x++){</b>
+<b class="nc">&nbsp;                    for (int y=26;y&lt;=36;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //右32
+<b class="nc">&nbsp;                a=Integer.parseInt(rightInsole.getR32());</b>
+<b class="nc">&nbsp;                for (int x=48;x&lt;=53;x++){</b>
+<b class="nc">&nbsp;                    for (int y=26;y&lt;=36;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //右21
+<b class="nc">&nbsp;                a=Integer.parseInt(rightInsole.getR21());</b>
+<b class="nc">&nbsp;                for (int x=52;x&lt;=57;x++){</b>
+<b class="nc">&nbsp;                    for (int y=14;y&lt;=24;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //右22
+<b class="nc">&nbsp;                a=Integer.parseInt(rightInsole.getR22());</b>
+<b class="nc">&nbsp;                for (int x=59;x&lt;=64;x++){</b>
+<b class="nc">&nbsp;                    for (int y=14;y&lt;=24;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //右11
+<b class="nc">&nbsp;                a=Integer.parseInt(rightInsole.getR12());</b>
+<b class="nc">&nbsp;                for (int x=52;x&lt;=57;x++){</b>
+<b class="nc">&nbsp;                    for (int y=2;y&lt;=12;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                //右12
+<b class="nc">&nbsp;                a=Integer.parseInt(rightInsole.getR13());</b>
+<b class="nc">&nbsp;                for (int x=59;x&lt;=64;x++){</b>
+<b class="nc">&nbsp;                    for (int y=2;y&lt;=12;y++){</b>
+<b class="nc">&nbsp;                        data[x][y]=a;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //将数据输入到result数组
+<b class="nc">&nbsp;            a=0;</b>
+<b class="nc">&nbsp;            for (int x=0;x&lt;72;x++){</b>
+<b class="nc">&nbsp;                for (int y=0;y&lt;77;y++){</b>
+<b class="nc">&nbsp;                    result1[a] = &quot;[&quot; + x + &quot;,&quot; + y + &quot;,&quot; + data[x][y] + &quot;]&quot;;</b>
+<b class="nc">&nbsp;                    a++;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            result.setResult(result1);</b>
+&nbsp;
+<b class="nc">&nbsp;            dataList.add(result);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return dataList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SportAnalysis searchRecord(SportmanInfo sportmanInfo) {
+&nbsp;        SportAnalysis sportAnalysis;
+<b class="nc">&nbsp;        sportAnalysis=sportAnalysisMapper.getrecord(sportmanInfo);</b>
+<b class="nc">&nbsp;        return sportAnalysis;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Data&gt; sportman_echarts_data(SportmanInfo sportmanInfo) {
+<b class="nc">&nbsp;        List&lt;Data&gt; dataList=new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        SportAnalysis sportAnalysis=new SportAnalysis();</b>
+<b class="nc">&nbsp;        Data data=new Data();</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Sole_data1&gt; valueList=new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        Sole_data1 sole_data2=new Sole_data1();</b>
+<b class="nc">&nbsp;        Sole_data1 sole_data3=new Sole_data1();</b>
+&nbsp;        double value2;
+&nbsp;        double value3;
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Sole_data&gt; valueList1=new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        Sole_data sole_data=new Sole_data();</b>
+<b class="nc">&nbsp;        Sole_data sole_data1=new Sole_data();</b>
+<b class="nc">&nbsp;        double[] value=new double[4];</b>
+<b class="nc">&nbsp;        double[] value1=new double[4];</b>
+&nbsp;
+<b class="nc">&nbsp;        sportAnalysis=sportAnalysisMapper.getrecord(sportmanInfo);</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        sole_data.setName(&quot;左脚&quot;);</b>
+<b class="nc">&nbsp;        value[0]=sportAnalysis.getLeft_result_1();</b>
+<b class="nc">&nbsp;        value[1]=sportAnalysis.getLeft_result_2();</b>
+<b class="nc">&nbsp;        value[2]=sportAnalysis.getLeft_result_3();</b>
+<b class="nc">&nbsp;        value[3]=sportAnalysis.getLeft_result_4();</b>
+<b class="nc">&nbsp;        sole_data.setValue(value);</b>
+&nbsp;
+<b class="nc">&nbsp;        sole_data1.setName(&quot;右脚&quot;);</b>
+<b class="nc">&nbsp;        value1[0]=sportAnalysis.getRight_result_1();</b>
+<b class="nc">&nbsp;        value1[1]=sportAnalysis.getRight_result_2();</b>
+<b class="nc">&nbsp;        value1[2]=sportAnalysis.getRight_result_3();</b>
+<b class="nc">&nbsp;        value1[3]=sportAnalysis.getRight_result_4();</b>
+<b class="nc">&nbsp;        sole_data1.setValue(value1);</b>
+&nbsp;
+<b class="nc">&nbsp;        sole_data2.setName(&quot;左脚&quot;);</b>
+<b class="nc">&nbsp;        value2=sportAnalysis.getLeft_average();</b>
+<b class="nc">&nbsp;        sole_data2.setValue(value2);</b>
+<b class="nc">&nbsp;        sole_data3.setName(&quot;右脚&quot;);</b>
+<b class="nc">&nbsp;        sole_data3.setValue(sportAnalysis.getRight_average());</b>
+&nbsp;
+<b class="nc">&nbsp;        valueList.add(sole_data2);</b>
+<b class="nc">&nbsp;        valueList.add(sole_data3);</b>
+&nbsp;
+<b class="nc">&nbsp;        valueList1.add(sole_data);</b>
+<b class="nc">&nbsp;        valueList1.add(sole_data1);</b>
+&nbsp;
+<b class="nc">&nbsp;        data.setId(1);</b>
+<b class="nc">&nbsp;        data.setName(sportmanInfo.getSportman_name());</b>
+<b class="nc">&nbsp;        data.setSportman_id(sportmanInfo.getSportman_id());</b>
+<b class="nc">&nbsp;        data.setValueList(valueList);</b>
+<b class="nc">&nbsp;        data.setValueList1(valueList1);</b>
+<b class="nc">&nbsp;        data.setWeight(sportmanInfo.getWeight());</b>
+<b class="nc">&nbsp;        data.setHeight(sportmanInfo.getHeight());</b>
+&nbsp;
+<b class="nc">&nbsp;        dataList.add(data);</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        return dataList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public String[] sole_data(SportmanInfo sportmanInfo) {
+&nbsp;
+<b class="nc">&nbsp;        BindInsole bindInsole=bindInsoleMapper.selectById(sportmanInfo);</b>
+<b class="nc">&nbsp;        RightInsole rightInsole=rightInsoleMapper.selectById(bindInsole);</b>
+<b class="nc">&nbsp;        System.out.println(rightInsole);</b>
+<b class="nc">&nbsp;        int a=0;</b>
+&nbsp;
+<b class="nc">&nbsp;        String[] result=new String[5544];</b>
+<b class="nc">&nbsp;        int[][] data=new int[72][77];</b>
+<b class="nc">&nbsp;        for (int x=0;x&lt;72;x++){</b>
+<b class="nc">&nbsp;            for (int y=0;y&lt;77;y++){</b>
+<b class="nc">&nbsp;                data[x][y]=0;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if(!Objects.equals(bindInsole.getLeft_id(), &quot;&quot;)){</b>
+<b class="nc">&nbsp;            LeftInsole leftInsole=leftInsoleMapper.selectById(bindInsole);</b>
+&nbsp;            //左11
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL13());</b>
+<b class="nc">&nbsp;            for (int x=8;x&lt;=14;x++){</b>
+<b class="nc">&nbsp;                for (int y=2;y&lt;=12;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左12
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL12());</b>
+<b class="nc">&nbsp;            for (int x=16;x&lt;=22;x++){</b>
+<b class="nc">&nbsp;                for (int y=2;y&lt;=12;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左21
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL22());</b>
+<b class="nc">&nbsp;            for (int x=8;x&lt;=14;x++){</b>
+<b class="nc">&nbsp;                for (int y=14;y&lt;=24;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左22
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL21());</b>
+<b class="nc">&nbsp;            for (int x=16;x&lt;=22;x++){</b>
+<b class="nc">&nbsp;                for (int y=14;y&lt;=24;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左31
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL34());</b>
+<b class="nc">&nbsp;            for (int x=5;x&lt;=10;x++){</b>
+<b class="nc">&nbsp;                for (int y=26;y&lt;=36;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左32
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL33());</b>
+<b class="nc">&nbsp;            for (int x=12;x&lt;=17;x++){</b>
+<b class="nc">&nbsp;                for (int y=26;y&lt;=36;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左33
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL32());</b>
+<b class="nc">&nbsp;            for (int x=19;x&lt;=24;x++){</b>
+<b class="nc">&nbsp;                for (int y=26;y&lt;=36;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左41
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL44());</b>
+<b class="nc">&nbsp;            for (int x=2;x&lt;=17;x++){</b>
+<b class="nc">&nbsp;                for (int y=38;y&lt;=48;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左51
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL54());</b>
+<b class="nc">&nbsp;            for (int x=5;x&lt;=10;x++){</b>
+<b class="nc">&nbsp;                for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左52
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL53());</b>
+<b class="nc">&nbsp;            for (int x=12;x&lt;=17;x++){</b>
+<b class="nc">&nbsp;                for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左53
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL52());</b>
+<b class="nc">&nbsp;            for (int x=19;x&lt;=24;x++){</b>
+<b class="nc">&nbsp;                for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左54
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL52());</b>
+<b class="nc">&nbsp;            for (int x=26;x&lt;=31;x++){</b>
+<b class="nc">&nbsp;                for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左61
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL64());</b>
+<b class="nc">&nbsp;            for (int x=8;x&lt;=13;x++){</b>
+<b class="nc">&nbsp;                for (int y=62;y&lt;=72;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左62
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL63());</b>
+<b class="nc">&nbsp;            for (int x=15;x&lt;=20;x++){</b>
+<b class="nc">&nbsp;                for (int y=62;y&lt;=75;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左63
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL62());</b>
+<b class="nc">&nbsp;            for (int x=22;x&lt;=27;x++){</b>
+<b class="nc">&nbsp;                for (int y=62;y&lt;=75;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //左64
+<b class="nc">&nbsp;            a= Integer.parseInt(leftInsole.getL61());</b>
+<b class="nc">&nbsp;            for (int x=29;x&lt;=34;x++){</b>
+<b class="nc">&nbsp;                for (int y=62;y&lt;=72;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if(!Objects.equals(bindInsole.getRight_id(), &quot;&quot;)){</b>
+&nbsp;            //右61
+<b class="nc">&nbsp;            a=Integer.parseInt(rightInsole.getR61());</b>
+<b class="nc">&nbsp;            for (int x=40;x&lt;=45;x++){</b>
+<b class="nc">&nbsp;                for (int y=62;y&lt;=72;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //右62
+<b class="nc">&nbsp;            a=Integer.parseInt(rightInsole.getR62());</b>
+<b class="nc">&nbsp;            for (int x=47;x&lt;=52;x++){</b>
+<b class="nc">&nbsp;                for (int y=62;y&lt;=75;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //右63
+<b class="nc">&nbsp;            a=Integer.parseInt(rightInsole.getR63());</b>
+<b class="nc">&nbsp;            for (int x=54;x&lt;=57;x++){</b>
+<b class="nc">&nbsp;                for (int y=62;y&lt;=75;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //右64
+<b class="nc">&nbsp;            a=Integer.parseInt(rightInsole.getR64());</b>
+<b class="nc">&nbsp;            for (int x=59;x&lt;=64;x++){</b>
+<b class="nc">&nbsp;                for (int y=62;y&lt;=72;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //右54
+<b class="nc">&nbsp;            a=Integer.parseInt(rightInsole.getR54());</b>
+<b class="nc">&nbsp;            for (int x=62;x&lt;=67;x++){</b>
+<b class="nc">&nbsp;                for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //右53
+<b class="nc">&nbsp;            a=Integer.parseInt(rightInsole.getR53());</b>
+<b class="nc">&nbsp;            for (int x=55;x&lt;=60;x++){</b>
+<b class="nc">&nbsp;                for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //右52
+<b class="nc">&nbsp;            a=Integer.parseInt(rightInsole.getR52());</b>
+<b class="nc">&nbsp;            for (int x=48;x&lt;=53;x++){</b>
+<b class="nc">&nbsp;                for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //右51
+<b class="nc">&nbsp;            a=Integer.parseInt(rightInsole.getR51());</b>
+<b class="nc">&nbsp;            for (int x=41;x&lt;=46;x++){</b>
+<b class="nc">&nbsp;                for (int y=50;y&lt;=60;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //右41
+<b class="nc">&nbsp;            a= Integer.parseInt(rightInsole.getR44());</b>
+<b class="nc">&nbsp;            for (int x=55;x&lt;=70;x++){</b>
+<b class="nc">&nbsp;                for (int y=38;y&lt;=48;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //右34
+<b class="nc">&nbsp;            a= Integer.parseInt(rightInsole.getR34());</b>
+<b class="nc">&nbsp;            for (int x=62;x&lt;=67;x++){</b>
+<b class="nc">&nbsp;                for (int y=26;y&lt;=36;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;
+&nbsp;            //右33
+<b class="nc">&nbsp;            a=Integer.parseInt(rightInsole.getR33());</b>
+<b class="nc">&nbsp;            for (int x=55;x&lt;=60;x++){</b>
+<b class="nc">&nbsp;                for (int y=26;y&lt;=36;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //右32
+<b class="nc">&nbsp;            a=Integer.parseInt(rightInsole.getR32());</b>
+<b class="nc">&nbsp;            for (int x=48;x&lt;=53;x++){</b>
+<b class="nc">&nbsp;                for (int y=26;y&lt;=36;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //右21
+<b class="nc">&nbsp;            a=Integer.parseInt(rightInsole.getR21());</b>
+<b class="nc">&nbsp;            for (int x=52;x&lt;=57;x++){</b>
+<b class="nc">&nbsp;                for (int y=14;y&lt;=24;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //右22
+<b class="nc">&nbsp;            a=Integer.parseInt(rightInsole.getR22());</b>
+<b class="nc">&nbsp;            for (int x=59;x&lt;=64;x++){</b>
+<b class="nc">&nbsp;                for (int y=14;y&lt;=24;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //右11
+<b class="nc">&nbsp;            a=Integer.parseInt(rightInsole.getR12());</b>
+<b class="nc">&nbsp;            for (int x=52;x&lt;=57;x++){</b>
+<b class="nc">&nbsp;                for (int y=2;y&lt;=12;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            //右12
+<b class="nc">&nbsp;            a=Integer.parseInt(rightInsole.getR13());</b>
+<b class="nc">&nbsp;            for (int x=59;x&lt;=64;x++){</b>
+<b class="nc">&nbsp;                for (int y=2;y&lt;=12;y++){</b>
+<b class="nc">&nbsp;                    data[x][y]=a;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        //将数据输入到result数组
+<b class="nc">&nbsp;        a=0;</b>
+<b class="nc">&nbsp;        for (int x=0;x&lt;72;x++){</b>
+<b class="nc">&nbsp;            for (int y=0;y&lt;77;y++){</b>
+<b class="nc">&nbsp;                result[a] = &quot;[&quot; + x + &quot;,&quot; + y + &quot;,&quot; + data[x][y] + &quot;]&quot;;</b>
+<b class="nc">&nbsp;                a++;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addRecordBySportman(SportmanInfo sportmanInfo) {
+&nbsp;
+<b class="nc">&nbsp;        SportAnalysis sportAnalysis =new SportAnalysis();</b>
+&nbsp;        SportAnalysis sportAnalysis_left;
+&nbsp;        SportAnalysis sportAnalysis_right;
+&nbsp;
+<b class="nc">&nbsp;        sportAnalysis.setSportman_id(sportmanInfo.getSportman_id());</b>
+<b class="nc">&nbsp;        sportAnalysis.setSportman_name(sportmanInfo.getSportman_name());</b>
+<b class="nc">&nbsp;        sportAnalysis.setLeft_average(sportAnalysisMapper.getleftavg(sportmanInfo));</b>
+<b class="nc">&nbsp;        sportAnalysis.setRight_average(sportAnalysisMapper.getrightavg(sportmanInfo));</b>
+<b class="nc">&nbsp;        sportAnalysis.setLeft_result(sportAnalysisMapper.getleftdir(sportmanInfo));</b>
+<b class="nc">&nbsp;        sportAnalysis.setRight_result(sportAnalysisMapper.getrightdir(sportmanInfo));</b>
+&nbsp;
+&nbsp;        //获取左右脚四个鞋垫区域压力(总共八个)
+<b class="nc">&nbsp;        sportAnalysis_left=sportAnalysisMapper.getleft_little_avg(sportmanInfo);</b>
+<b class="nc">&nbsp;        sportAnalysis_right=sportAnalysisMapper.getright_little_avg(sportmanInfo);</b>
+&nbsp;
+<b class="nc">&nbsp;        sportAnalysis.setLeft_result_1(sportAnalysis_left.getLeft_result_1());</b>
+<b class="nc">&nbsp;        sportAnalysis.setLeft_result_2(sportAnalysis_left.getLeft_result_2());</b>
+<b class="nc">&nbsp;        sportAnalysis.setLeft_result_3(sportAnalysis_left.getLeft_result_3());</b>
+<b class="nc">&nbsp;        sportAnalysis.setLeft_result_4(sportAnalysis_left.getLeft_result_4());</b>
+&nbsp;
+<b class="nc">&nbsp;        sportAnalysis.setRight_result_1(sportAnalysis_right.getRight_result_1());</b>
+<b class="nc">&nbsp;        sportAnalysis.setRight_result_2(sportAnalysis_right.getRight_result_2());</b>
+<b class="nc">&nbsp;        sportAnalysis.setRight_result_3(sportAnalysis_right.getRight_result_3());</b>
+<b class="nc">&nbsp;        sportAnalysis.setRight_result_4(sportAnalysis_right.getRight_result_4());</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        sportAnalysisMapper.addRecord(sportAnalysis);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-26 09:56</div>
+</div>
+</body>
+</html>

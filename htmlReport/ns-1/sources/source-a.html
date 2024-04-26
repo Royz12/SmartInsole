@@ -1,0 +1,176 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > SportmanInfoService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.graduationdesign.springbootsmartinsole.service</a>
+</div>
+
+<h1>Coverage Summary for Class: SportmanInfoService (com.graduationdesign.springbootsmartinsole.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SportmanInfoService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (1/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    4%
+  </span>
+  <span class="absValue">
+    (1/25)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.graduationdesign.springbootsmartinsole.service;
+&nbsp;
+&nbsp;import com.github.pagehelper.PageHelper;
+&nbsp;import com.github.pagehelper.PageInfo;
+&nbsp;import com.graduationdesign.springbootsmartinsole.common.Result;
+&nbsp;import com.graduationdesign.springbootsmartinsole.controller.dto.SportmanInfoDto;
+&nbsp;import com.graduationdesign.springbootsmartinsole.entity.ExpertInfo;
+&nbsp;import com.graduationdesign.springbootsmartinsole.entity.SportmanInfo;
+&nbsp;import com.graduationdesign.springbootsmartinsole.mapper.SportmanInfoMapper;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class SportmanInfoService {</b>
+&nbsp;    @Autowired
+&nbsp;    private SportmanInfoMapper sportmanInfoMapper;
+&nbsp;    public Result insert(SportmanInfo sportmanInfo) {
+<b class="nc">&nbsp;        SportmanInfo s=sportmanInfoMapper.FindByPass(sportmanInfo.getPhonenumber());</b>
+<b class="nc">&nbsp;        if (s==null){</b>
+<b class="nc">&nbsp;            sportmanInfoMapper.insert(sportmanInfo);</b>
+<b class="nc">&nbsp;            return Result.success(sportmanInfo);</b>
+&nbsp;        }else {
+<b class="nc">&nbsp;            return Result.error(&quot;用户已存在&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Result login(SportmanInfoDto SportmanInfoDto) {
+<b class="nc">&nbsp;        SportmanInfo s=sportmanInfoMapper.FindByPass(SportmanInfoDto.getPhonenumber());</b>
+<b class="nc">&nbsp;        if (s==null){</b>
+<b class="nc">&nbsp;            return Result.error(&quot;用户不存在&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if(s.getPassword().equals(SportmanInfoDto.getPassword())){</b>
+<b class="nc">&nbsp;            return Result.success(s);</b>
+&nbsp;        }else{
+<b class="nc">&nbsp;            return Result.error(&quot;登录失败&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    public void updateInfo(SportmanInfo sportmanInfo) {
+<b class="nc">&nbsp;        sportmanInfoMapper.update(sportmanInfo);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Result modifyPass(SportmanInfo sportmanInfo) {
+<b class="nc">&nbsp;        SportmanInfo s=sportmanInfoMapper.FindByPass(sportmanInfo.getPhonenumber());</b>
+<b class="nc">&nbsp;        if(s!=null){</b>
+<b class="nc">&nbsp;            if(Objects.equals(sportmanInfo.getPassword(), s.getPassword())) {</b>
+<b class="nc">&nbsp;                return Result.error(&quot;不能与原密码相同&quot;);</b>
+&nbsp;            }else {
+<b class="nc">&nbsp;                sportmanInfoMapper.modifyPass(sportmanInfo);</b>
+<b class="nc">&nbsp;                return Result.success(&quot;修改成功&quot;);</b>
+&nbsp;            }
+&nbsp;        } else{
+<b class="nc">&nbsp;            return Result.error(&quot;该用户不存在&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void delete(SportmanInfo sportmanInfo) {
+<b class="nc">&nbsp;        sportmanInfoMapper.delete(sportmanInfo);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;SportmanInfo&gt; list() {
+<b class="nc">&nbsp;        return sportmanInfoMapper.list();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PageInfo&lt;SportmanInfo&gt; selectPage(SportmanInfo sportmanInfo, Integer pageNum, Integer pageSize) {
+<b class="nc">&nbsp;        PageHelper.startPage(pageNum, pageSize);</b>
+<b class="nc">&nbsp;        List&lt;SportmanInfo&gt; list = sportmanInfoMapper.selectall(sportmanInfo,pageNum,pageSize);</b>
+<b class="nc">&nbsp;        return PageInfo.of(list);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-26 09:56</div>
+</div>
+</body>
+</html>
